@@ -37,25 +37,25 @@ function append(el, where) {
 }
 
 
-function DisplayLocation(locationRes) {
+async function DisplayLocation(locationRes) {
 
-    for (let l = 0; l < locationRes.length; l++) {
-        var t = newElem('div', {
-            class: 'hello',
-            id: 'tratotui',
+    for (let i = 0; i < locationRes.length; i++) {
+        var t = newElem('rect', {
+            width: '300',
+            height: '100',
+            style: 'fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)'
         })
-        t.innerHTML = 'Привет, мир!';
+        t.innerHTML = locationRes[i].residents.length;
         one.appendChild(t);
     }
-    // var ndiv = newElem('div');
 }
 
 
 async function start() {
     const location = await Request("https://rickandmortyapi.com/api/location/")
     console.log(location)
-    console.log(location.results[0].residents.length)
-        // DisplayLocation(location.results.residents.length)
+        // console.log(location.results[0].residents.length)
+    await DisplayLocation(location.results)
 
 }
 

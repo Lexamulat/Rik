@@ -11,6 +11,7 @@ import (
 
 func Test(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("static/index.html")
+	w.Header().Set("Cache-Control", "no-cache")
 	t.Execute(w, t)
 
 }
