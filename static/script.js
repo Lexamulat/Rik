@@ -40,13 +40,11 @@ function append(el, where) {
 async function DisplayLocation(locationRes) {
 
     for (let i = 0; i < locationRes.length; i++) {
-        var t = newElem('rect', {
-            width: '300',
-            height: '100',
-            style: 'fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)'
+        var t = newElem('li', {
+            class: 'clr'
         })
         t.innerHTML = locationRes[i].residents.length;
-        one.appendChild(t);
+        two.appendChild(t);
     }
 }
 
@@ -55,7 +53,7 @@ async function start() {
     const location = await Request("https://rickandmortyapi.com/api/location/")
     console.log(location)
         // console.log(location.results[0].residents.length)
-    await DisplayLocation(location.results)
+        // await DisplayLocation(location.results)
 
 }
 
