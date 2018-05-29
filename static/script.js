@@ -49,58 +49,83 @@ function append(el, where) {
 
 // }
 
-async function DisplayLocation(locationRes) {
+function SetMax(locationRes, CharactersStack, summ, callback) {
+    for (var i = 0; i < locationRes.length; i++) {
+        summ += locationRes[i].residents.length + 1;
+        if (CharactersStack[locationRes[i].residents.length] == undefined) {
+            CharactersStack[locationRes[i].residents.length] = { 'max': 1, 'curr': 1, 'name': locationRes[i].name, 'url': locationRes[i].url, 'setX': 1, };
+        } else {
+            CharactersStack[locationRes[i].residents.length].max++;
+            CharactersStack[locationRes[i].residents.length].curr++;
+        }
+
+    }
+    console.log("2")
+    callback(summ);
+}
+
+
+function TosetX(CharactersStack, widthOfOneElement, currentSetX, call) {
+    for (var key in CharactersStack) {
+        currentSetX += ((key * widthOfOneElement) + widthOfOneElement);
+        CharactersStack[key].setX = currentSetX;
+    }
+    // console.log(CharactersStack)
+    call()
+}
+
+
+function DisplayLocation(locationRes) {
     var summ = 0;
     var shift = 0;
     var xCoord = 0,
         yCoord = 0;
+    var CharactersStack = {};
+    console.log("1")
+    SetMax(locationRes, CharactersStack, summ, function(summ) {
 
-    for (let i = 0; i < locationRes.length; i++) {
-        summ += locationRes[i].residents.length;
-    }
+        var widthOfOneElement = 100 / summ;
+        var currentSetX = 0;
+        console.log("3")
+        console.log(CharactersStack)
+        console.log("4")
+        TosetX(CharactersStack, widthOfOneElement, currentSetX, function() {
+            console.log(CharactersStack)
+            var widthOfTheBlock = 0;
+            var setY = 0;
+            var setHeight = 0;
 
-    //!! summ of inhabitants, for ex. 354, then each inhabitant will add @widthOfOneElement@ to the width of the block
-    var widthOfOneElement = 100 / summ;
+            for (var key in CharactersStack) {
+                widthOfTheBlock = ((key * widthOfOneElement) + widthOfOneElement);
+                setHeight = (100 / (CharactersStack[key].max));
+                setY = CharactersStack[key].max - CharactersStack[key].curr
 
+                var t = newElem('rect', {
+                    x: CharactersStack[key].setX + '%',
+                    y: setY + '%',
+                    width: widthOfTheBlock + '%',
+                    height: setHeight + '%',
+                    stroke: 'black',
+                    fill: 'transparent'
+                })
 
+                t.innerHTML = key;
+                one.appendChild(t);
+            }
+        });
 
-    var widthOfTheBlock = 0;
+    });
 
-    for (let i = 0; i < locationRes.length; i++) {
-
-        widthOfTheBlock = (locationRes[i].residents.length) * widthOfOneElement;
-
-        // console.log("------------------")
-        // console.log(locationRes[i].residents.length)
-        // console.log(widthOfTheBlock)
-        // console.log("------------------")
-
-        // await lineCount(locationRes[i].residents.length)
-
-        var t = newElem('rect', {
-            x: xCoord + '%',
-            y: '0',
-            width: widthOfTheBlock + '%',
-            height: '100%',
-            stroke: 'black',
-            fill: 'transparent'
-        })
-
-        t.innerHTML = locationRes[i].residents.length;
-        one.appendChild(t);
-
-        xCoord += widthOfTheBlock;
-
-    }
 }
 
 
 async function start() {
     const location = await Request("https://rickandmortyapi.com/api/location/")
-        // console.log(location)
+        // console.log(location.results)
         // console.log(location.results[0].residents.length)
-    await DisplayLocation(location.results)
+    DisplayLocation(location.results)
+
 
 }
 
-$(document).ready(start)
+$(document).ready(start);
