@@ -53,7 +53,7 @@ function SetMax(locationRes, CharactersStack, summ, callback) {
     for (var i = 0; i < locationRes.length; i++) {
         summ += locationRes[i].residents.length + 1;
         if (CharactersStack[locationRes[i].residents.length] == undefined) {
-            CharactersStack[locationRes[i].residents.length] = { 'max': 1, 'curr': 1, 'name': locationRes[i].name, 'url': locationRes[i].url, 'setX': 1, };
+            CharactersStack[locationRes[i].residents.length] = { 'max': 1, 'curr': 1, 'setX': 0 };
         } else {
             CharactersStack[locationRes[i].residents.length].max++;
             CharactersStack[locationRes[i].residents.length].curr++;
@@ -66,11 +66,13 @@ function SetMax(locationRes, CharactersStack, summ, callback) {
 
 
 function TosetX(CharactersStack, widthOfOneElement, currentSetX, call) {
+    var prevX = 0;
     for (var key in CharactersStack) {
-        currentSetX += ((key * widthOfOneElement) + widthOfOneElement);
+        currentSetX += prevX * widthOfOneElement;
+        // currentSetX += ((key * widthOfOneElement) + widthOfOneElement); //первый отступ должен быть 0
         CharactersStack[key].setX = currentSetX;
+        prevX = Number(key) + 1;
     }
-    // console.log(CharactersStack)
     call()
 }
 
@@ -81,27 +83,53 @@ function DisplayLocation(locationRes) {
     var xCoord = 0,
         yCoord = 0;
     var CharactersStack = {};
-    console.log("1")
+
+
     SetMax(locationRes, CharactersStack, summ, function(summ) {
 
         var widthOfOneElement = 100 / summ;
         var currentSetX = 0;
-        console.log("3")
-        console.log(CharactersStack)
-        console.log("4")
+
         TosetX(CharactersStack, widthOfOneElement, currentSetX, function() {
-            console.log(CharactersStack)
+
             var widthOfTheBlock = 0;
+            var XsetX = 0;
             var setY = 0;
             var setHeight = 0;
 
-            for (var key in CharactersStack) {
-                widthOfTheBlock = ((key * widthOfOneElement) + widthOfOneElement);
-                setHeight = (100 / (CharactersStack[key].max));
-                setY = CharactersStack[key].max - CharactersStack[key].curr
+            // for (var key in CharactersStack) {
+            //     widthOfTheBlock = ((key * widthOfOneElement) + widthOfOneElement);
+            //     setHeight = (100 / (CharactersStack[key].max));
+            //     setY = CharactersStack[key].max - CharactersStack[key].curr
 
+            //     var t = newElem('rect', {
+            //         x: CharactersStack[key].setX + '%',
+            //         y: setY + '%',
+            //         width: widthOfTheBlock + '%',
+            //         height: setHeight + '%',
+            //         stroke: 'black',
+            //         fill: 'transparent'
+            //     })
+            var tmp = 0
+            var summwidth = 0;
+            console.log(CharactersStack)
+            for (let i = 0; i < locationRes.length; i++) {
+                tmp = locationRes[i].residents.length
+                    // widthOfTheBlock = (locationRes[i].residents.length) * widthOfOneElement;
+                setHeight = (100 / CharactersStack[locationRes[i].residents.length].max);
+                XsetX = CharactersStack[locationRes[i].residents.length].setX
+
+                setY = ((CharactersStack[locationRes[i].residents.length].max - CharactersStack[locationRes[i].residents.length].curr) * setHeight);
+                CharactersStack[locationRes[i].residents.length].curr--;
+                widthOfTheBlock = ((locationRes[i].residents.length * widthOfOneElement) + widthOfOneElement);
+                summwidth += XsetX
+                if (locationRes[i].residents.length == 105) {
+                    console.log("---------")
+                    console.log(XsetX)
+                    console.log(widthOfTheBlock)
+                }
                 var t = newElem('rect', {
-                    x: CharactersStack[key].setX + '%',
+                    x: XsetX + '%',
                     y: setY + '%',
                     width: widthOfTheBlock + '%',
                     height: setHeight + '%',
@@ -109,9 +137,17 @@ function DisplayLocation(locationRes) {
                     fill: 'transparent'
                 })
 
-                t.innerHTML = key;
+                t.innerHTML = locationRes[i].residents.length;
                 one.appendChild(t);
+
+
+
             }
+
+
+            // t.innerHTML = key;
+            // one.appendChild(t);
+
         });
 
     });
@@ -121,10 +157,9 @@ function DisplayLocation(locationRes) {
 
 async function start() {
     const location = await Request("https://rickandmortyapi.com/api/location/")
-        // console.log(location.results)
+    console.log(location.results)
         // console.log(location.results[0].residents.length)
     DisplayLocation(location.results)
-
 
 }
 

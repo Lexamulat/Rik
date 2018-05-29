@@ -14,7 +14,10 @@ function attr(el, at, value) {
     if (!value) {
         return el[at] || el.getAttribute(at) || '';
     } else {
-        if (at == 'style') { el.style.cssText = value; return; }
+        if (at == 'style') {
+            el.style.cssText = value;
+            return;
+        }
         el[at] = value;
         if (el.setAttribute) el.setAttribute(at, value);
     }
