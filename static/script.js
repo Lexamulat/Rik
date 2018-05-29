@@ -7,6 +7,8 @@ async function Request(url, postData) {
 }
 
 
+
+
 function attr(el, at, value) {
     at = { 'for': 'htmlFor', 'class': 'className' }[at] || at;
     if (!value) {
@@ -37,23 +39,61 @@ function append(el, where) {
 }
 
 
-async function DisplayLocation(locationRes) {
 
-    for (let i = 0; i < locationRes.length; i++) {
-        var t = newElem('li', {
-            class: 'clr'
-        })
-        t.innerHTML = locationRes[i].residents.length;
-        two.appendChild(t);
-    }
-}
+/* <rect x="10%" y="10%" width="10%" height="20%" stroke="black" fill="transparent" stroke-width="1"/>  */
+
+
+// async function lineCount(size, totalWeightOfElements) {
+//     var x = 0,
+//         y = 0;
+
+// }
+
+// async function DisplayLocation(locationRes) {
+//     var summ = 0;
+//     var shift = 0;
+//     var xCoord = 0,
+//         yCoord = 0;
+
+//     for (let i = 0; i < locationRes.length; i++) {
+//         summ += locationRes[i].residents.length;
+//     }
+
+//     //!! summ of inhabitants, for ex. 354, then each inhabitant will add @widthOfOneElement@ to the width of the block
+//     var widthOfOneElement = summ / 100;
+
+//     console.log(widthOfOneElement)
+
+//     var widthOfTheBlock = 0;
+
+//     for (let i = 0; i < locationRes.length; i++) {
+
+//         widthOfTheBlock = (locationRes[i].residents.length) * widthOfOneElement;
+//         // await lineCount(locationRes[i].residents.length)
+
+//         var t = newElem('rec', {
+//             x: xCoord + '%',
+//             y: '0',
+//             width: widthOfTheBlock + '%',
+//             height: '100%',
+//             stroke: 'black',
+//             fill: 'transparent'
+//         })
+
+//         t.innerHTML = locationRes[i].residents.length;
+//         one.appendChild(t);
+
+//         xCoord += widthOfTheBlock;
+
+//     }
+// }
 
 
 async function start() {
-    const location = await Request("https://rickandmortyapi.com/api/location/")
-    console.log(location)
-        // console.log(location.results[0].residents.length)
-        // await DisplayLocation(location.results)
+    // const location = await Request("https://rickandmortyapi.com/api/location/")
+    // console.log(location)
+    // console.log(location.results[0].residents.length)
+    // await DisplayLocation(location.results)
 
 }
 
