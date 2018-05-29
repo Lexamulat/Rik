@@ -7,8 +7,6 @@ async function Request(url, postData) {
 }
 
 
-
-
 function attr(el, at, value) {
     at = { 'for': 'htmlFor', 'class': 'className' }[at] || at;
     if (!value) {
@@ -39,23 +37,15 @@ function append(el, where) {
 }
 
 
-
-/* <rect x="10%" y="10%" width="10%" height="20%" stroke="black" fill="transparent" stroke-width="1"/>  */
-
-
-// async function lineCount(size, totalWeightOfElements) {
-//     var x = 0,
-//         y = 0;
-
-// }
-
 function SetMax(locationRes, CharactersStack, summ, callback) {
+
     for (var i = 0; i < locationRes.length; i++) {
+        summ += locationRes[i].residents.length + 1;
 
         if (CharactersStack[locationRes[i].residents.length] == undefined) {
             CharactersStack[locationRes[i].residents.length] = { 'max': 1, 'curr': 1, 'setX': 0 };
-            summ += locationRes[i].residents.length + 1;
             //replaced summ
+
         } else {
             CharactersStack[locationRes[i].residents.length].max++;
             CharactersStack[locationRes[i].residents.length].curr++;
@@ -67,12 +57,23 @@ function SetMax(locationRes, CharactersStack, summ, callback) {
 
 
 function TosetX(CharactersStack, widthOfOneElement, currentSetX, call) {
-    var prevX = 0;
+
+    var prevkey = -1;
     for (var key in CharactersStack) {
-        currentSetX += prevX * widthOfOneElement;
-        // currentSetX += ((key * widthOfOneElement) + widthOfOneElement); //первый отступ должен быть 0
-        CharactersStack[key].setX = currentSetX;
-        prevX = Number(key) + 1;
+        if (prevkey == -1) {
+            CharactersStack[key].setX = 0;
+        } else {
+            if (prevkey == 0) {
+                currentSetX += (widthOfOneElement * (CharactersStack[prevkey].max))
+            } else {
+                currentSetX += (widthOfOneElement * (CharactersStack[prevkey].max * (Number(prevkey) + 1)))
+                var c = currentSetX
+
+            }
+            CharactersStack[key].setX = currentSetX;
+        }
+        prevkey = key
+
     }
     call()
 }
@@ -87,8 +88,9 @@ function DisplayLocation(locationRes) {
 
 
     SetMax(locationRes, CharactersStack, summ, function(summ) {
-
+        console.log(summ)
         var widthOfOneElement = 100 / summ;
+        console.log(widthOfOneElement)
         var currentSetX = 0;
 
         TosetX(CharactersStack, widthOfOneElement, currentSetX, function() {
@@ -119,12 +121,13 @@ function DisplayLocation(locationRes) {
             for (let i = 0; i < locationRes.length; i++) {
                 tmp = locationRes[i].residents.length
                     // widthOfTheBlock = (locationRes[i].residents.length) * widthOfOneElement;
-                setHeight = parseFloat(100 / CharactersStack[locationRes[i].residents.length].max);
+                setHeight = (100 / CharactersStack[locationRes[i].residents.length].max);
                 XsetX = CharactersStack[locationRes[i].residents.length].setX
 
-                setY = parseFloat((CharactersStack[locationRes[i].residents.length].max - CharactersStack[locationRes[i].residents.length].curr) * setHeight);
+                setY = ((CharactersStack[locationRes[i].residents.length].max - CharactersStack[locationRes[i].residents.length].curr) * setHeight);
                 CharactersStack[locationRes[i].residents.length].curr--;
-                widthOfTheBlock = parseFloat((locationRes[i].residents.length * widthOfOneElement) + widthOfOneElement);
+
+                widthOfTheBlock = ((((locationRes[i].residents.length) + 1) * widthOfOneElement) * (CharactersStack[locationRes[i].residents.length].max));
                 summwidth += XsetX
 
                 console.log("---------")
