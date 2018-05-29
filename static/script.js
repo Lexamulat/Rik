@@ -23,7 +23,7 @@ function attr(el, at, value) {
 function newElem(tag, params) {
     params = params || {};
     var elem = document.createElementNS ?
-        document.createElementNS('http://www.w3.org/1999/xhtml', tag) :
+        document.createElementNS("http://www.w3.org/2000/svg", tag) :
         document.createElement(tag);
 
     for (var pr in params) {
@@ -49,51 +49,57 @@ function append(el, where) {
 
 // }
 
-// async function DisplayLocation(locationRes) {
-//     var summ = 0;
-//     var shift = 0;
-//     var xCoord = 0,
-//         yCoord = 0;
+async function DisplayLocation(locationRes) {
+    var summ = 0;
+    var shift = 0;
+    var xCoord = 0,
+        yCoord = 0;
 
-//     for (let i = 0; i < locationRes.length; i++) {
-//         summ += locationRes[i].residents.length;
-//     }
+    for (let i = 0; i < locationRes.length; i++) {
+        summ += locationRes[i].residents.length;
+    }
 
-//     //!! summ of inhabitants, for ex. 354, then each inhabitant will add @widthOfOneElement@ to the width of the block
-//     var widthOfOneElement = summ / 100;
+    //!! summ of inhabitants, for ex. 354, then each inhabitant will add @widthOfOneElement@ to the width of the block
+    var widthOfOneElement = 100 / summ;
 
-//     console.log(widthOfOneElement)
 
-//     var widthOfTheBlock = 0;
 
-//     for (let i = 0; i < locationRes.length; i++) {
+    var widthOfTheBlock = 0;
 
-//         widthOfTheBlock = (locationRes[i].residents.length) * widthOfOneElement;
-//         // await lineCount(locationRes[i].residents.length)
+    for (let i = 0; i < locationRes.length; i++) {
 
-//         var t = newElem('rec', {
-//             x: xCoord + '%',
-//             y: '0',
-//             width: widthOfTheBlock + '%',
-//             height: '100%',
-//             stroke: 'black',
-//             fill: 'transparent'
-//         })
+        widthOfTheBlock = (locationRes[i].residents.length) * widthOfOneElement;
 
-//         t.innerHTML = locationRes[i].residents.length;
-//         one.appendChild(t);
+        // console.log("------------------")
+        // console.log(locationRes[i].residents.length)
+        // console.log(widthOfTheBlock)
+        // console.log("------------------")
 
-//         xCoord += widthOfTheBlock;
+        // await lineCount(locationRes[i].residents.length)
 
-//     }
-// }
+        var t = newElem('rect', {
+            x: xCoord + '%',
+            y: '0',
+            width: widthOfTheBlock + '%',
+            height: '100%',
+            stroke: 'black',
+            fill: 'transparent'
+        })
+
+        t.innerHTML = locationRes[i].residents.length;
+        one.appendChild(t);
+
+        xCoord += widthOfTheBlock;
+
+    }
+}
 
 
 async function start() {
-    // const location = await Request("https://rickandmortyapi.com/api/location/")
-    // console.log(location)
-    // console.log(location.results[0].residents.length)
-    // await DisplayLocation(location.results)
+    const location = await Request("https://rickandmortyapi.com/api/location/")
+        // console.log(location)
+        // console.log(location.results[0].residents.length)
+    await DisplayLocation(location.results)
 
 }
 
