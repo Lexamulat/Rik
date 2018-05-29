@@ -51,16 +51,17 @@ function append(el, where) {
 
 function SetMax(locationRes, CharactersStack, summ, callback) {
     for (var i = 0; i < locationRes.length; i++) {
-        summ += locationRes[i].residents.length + 1;
+
         if (CharactersStack[locationRes[i].residents.length] == undefined) {
             CharactersStack[locationRes[i].residents.length] = { 'max': 1, 'curr': 1, 'setX': 0 };
+            summ += locationRes[i].residents.length + 1;
+            //replaced summ
         } else {
             CharactersStack[locationRes[i].residents.length].max++;
             CharactersStack[locationRes[i].residents.length].curr++;
         }
 
     }
-    console.log("2")
     callback(summ);
 }
 
@@ -110,24 +111,28 @@ function DisplayLocation(locationRes) {
             //         stroke: 'black',
             //         fill: 'transparent'
             //     })
+
+
             var tmp = 0
             var summwidth = 0;
             console.log(CharactersStack)
             for (let i = 0; i < locationRes.length; i++) {
                 tmp = locationRes[i].residents.length
                     // widthOfTheBlock = (locationRes[i].residents.length) * widthOfOneElement;
-                setHeight = (100 / CharactersStack[locationRes[i].residents.length].max);
+                setHeight = parseFloat(100 / CharactersStack[locationRes[i].residents.length].max);
                 XsetX = CharactersStack[locationRes[i].residents.length].setX
 
-                setY = ((CharactersStack[locationRes[i].residents.length].max - CharactersStack[locationRes[i].residents.length].curr) * setHeight);
+                setY = parseFloat((CharactersStack[locationRes[i].residents.length].max - CharactersStack[locationRes[i].residents.length].curr) * setHeight);
                 CharactersStack[locationRes[i].residents.length].curr--;
-                widthOfTheBlock = ((locationRes[i].residents.length * widthOfOneElement) + widthOfOneElement);
+                widthOfTheBlock = parseFloat((locationRes[i].residents.length * widthOfOneElement) + widthOfOneElement);
                 summwidth += XsetX
-                if (locationRes[i].residents.length == 105) {
-                    console.log("---------")
-                    console.log(XsetX)
-                    console.log(widthOfTheBlock)
-                }
+
+                console.log("---------")
+                console.log("kol", locationRes[i].residents.length)
+                console.log("X", XsetX)
+                console.log("wig", widthOfTheBlock)
+                console.log(XsetX + widthOfTheBlock)
+
                 var t = newElem('rect', {
                     x: XsetX + '%',
                     y: setY + '%',
