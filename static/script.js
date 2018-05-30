@@ -164,10 +164,10 @@ function DisplayLocation(locationRes) {
 
 
 async function start() {
-    const location = await Request("https://rickandmortyapi.com/api/location/")
-    console.log(location.results)
-        // console.log(location.results[0].residents.length)
-    DisplayLocation(location.results)
+    // const location = await Request("https://rickandmortyapi.com/api/location/")
+    // console.log(location.results)
+    //     // console.log(location.results[0].residents.length)
+    // DisplayLocation(location.results)
 
 }
 
