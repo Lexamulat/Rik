@@ -205,6 +205,9 @@ function PopDown() {
 
     console.log("out")
 
+    var PopElem = document.getElementById('popUp')
+    PopElem.style.display = 'none';
+
 
 
 }
