@@ -118,7 +118,7 @@ function DisplayLocation(locationRes) {
             var tmp = 0
             var summwidth = 0;
             console.log(CharactersStack)
-            for (let i = 0; i < locationRes.length; i++) {
+            for (var i = 0; i < locationRes.length; i++) {
                 tmp = locationRes[i].residents.length
                     // widthOfTheBlock = (locationRes[i].residents.length) * widthOfOneElement;
                 setHeight = (100 / CharactersStack[locationRes[i].residents.length].max);
@@ -137,19 +137,16 @@ function DisplayLocation(locationRes) {
                 console.log(XsetX + widthOfTheBlock)
 
                 var t = newElem('rect', {
-                    x: XsetX + '%',
-                    y: setY + '%',
-                    width: widthOfTheBlock + '%',
-                    height: setHeight + '%',
-                    stroke: 'black',
-                    fill: 'transparent'
-                })
-
+                        x: XsetX + '%',
+                        y: setY + '%',
+                        width: widthOfTheBlock + '%',
+                        height: setHeight + '%',
+                        stroke: 'black',
+                        fill: 'transparent',
+                    })
+                    // не добавляет класс к прямогуг 
                 t.innerHTML = locationRes[i].residents.length;
                 one.appendChild(t);
-
-
-
             }
 
 
@@ -163,12 +160,54 @@ function DisplayLocation(locationRes) {
 }
 
 
+
+// $('.info').hover(
+//     function() {
+//       let top = $(this).offset().top + $(this).height();
+//       let left = $(this).offset().left;
+//       let data = $(this).data('modal-text');
+
+//       let div = document.createElement('div');
+//       div.id = 'modal';
+//       $(div).css('top', top);
+//       $(div).css('left', left);
+//       $(div).html(data);
+//       $('body').append(div);
+//     },
+//     function() {
+//       $('#modal').remove();
+//     });
+// document.body.onmouseover = handler
+
+// function handler(evet) {
+//     console.log("event")
+// }
+
+
 async function start() {
-    // const location = await Request("https://rickandmortyapi.com/api/location/")
-    // console.log(location.results)
-    //     // console.log(location.results[0].residents.length)
-    // DisplayLocation(location.results)
+    const location = await Request("https://rickandmortyapi.com/api/location/")
+    console.log(location.results)
+        // console.log(location.results[0].residents.length)
+        // DisplayLocation(location.results)
+        // var rectangles = document.getElementById('r');
+        // var rectangles = document.getElementsByClassName('popUp');
+    var rectangles = document.getElementsByTagName('rect');
+    console.log(rectangles)
+    for (var i = 0; i < rectangles.length; i++) {
+        rectangles[i].onmouseout = function(e) {
+            console.log("in")
+        }
+        rectangles[i].onmouseover = function(e) {
+            console.log("out")
+        }
+    }
+
+
+
+
 
 }
 
+// window.onload = start
+// window.onload = function ()
 $(document).ready(start);

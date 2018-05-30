@@ -10,6 +10,10 @@ body {
     height: 100vh;
 }
 
-.test {
-    background-color: brown;
+.popUp {
+    width: 20vh;
+    height: 8vh;
+    border: solid 1px black;
+    /* position: absolute; */
+    /* display: none; */
 }
