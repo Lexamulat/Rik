@@ -169,10 +169,10 @@ function PopUP() {
     var LeftOfThePop = Number(XBlock) + Number(WidthBlock)
     if (LeftOfThePop > 90) {
         PopElem.style.left = 48 + '%';
-        PopElem.style.top = 90 + '%';
+        PopElem.style.top = 50 + '%';
     } else {
         PopElem.style.left = LeftOfThePop + '%';
-        PopElem.style.top = YBlock;
+        PopElem.style.top = (Number(YBlock) + 1) + '%';
     }
 
 }

@@ -9,7 +9,7 @@ body {
 }
 
 #popUp {
-    width: 10%;
+    width: 12%;
     height: 5%;
     font-size: 0.8em;
     background-color: bisque;
@@ -24,7 +24,7 @@ body {
 
 /* выносить окно за размеры блока и не давать мышке на него навестись */
 
-@media screen and (max-width:864px) {
+@media screen and (max-width:767px) {
     #popUp {
         font-size: 0.6em;
         width: 23%;
