@@ -151,15 +151,15 @@ function DisplayLocation(locationRes) {
 function PopUP() {
     var SearchingId = this.getAttribute('uid')
 
-    for (var i = 0; i < Getlocation.results.length; i++) {
-        if (Getlocation.results[i].id == SearchingId) {
+    for (var i = 0; i < GetlocationRes.length; i++) {
+        if (GetlocationRes[i].id == SearchingId) {
             break;
         }
     }
     var PopElem = document.getElementById('popUp')
 
     PopElem.style.display = 'block';
-    PopElem.innerHTML = Getlocation.results[i].name + ' has ' + Getlocation.results[i].residents.length + ' residents'
+    PopElem.innerHTML = GetlocationRes[i].name + ' has ' + GetlocationRes[i].residents.length + ' residents'
 
     var XBlock = this.getAttribute('x')
     XBlock = (XBlock.slice(0, -1))
@@ -183,38 +183,49 @@ function PopDown() {
 }
 
 async function GetCharacters() {
-    console.log(Getlocation)
-    var SearchingId = this.getAttribute('uid')
+    document.location.href = "characters.html";
+    // console.log(Getlocation)
+    // var SearchingId = this.getAttribute('uid')
 
-    for (var i = 0; i < Getlocation.results.length; i++) {
-        if (Getlocation.results[i].id == SearchingId) {
-            break;
-        }
-    }
-    var curr = i
+    // for (var i = 0; i < Getlocation.results.length; i++) {
+    //     if (Getlocation.results[i].id == SearchingId) {
+    //         break;
+    //     }
+    // }
+    // var curr = i
 
-    var QueryStr = ''
-    var CurrStr = ''
+    // var QueryStr = ''
+    // var CurrStr = ''
 
-    for (var j = 0; j < Getlocation.results[curr].residents.length; j++) {
+    // for (var j = 0; j < Getlocation.results[curr].residents.length; j++) {
 
-        CurrStr = Getlocation.results[curr].residents[j]
-        CurrStr = CurrStr.substr(42)
-        QueryStr = QueryStr + ',' + CurrStr
+    //     CurrStr = Getlocation.results[curr].residents[j]
+    //     CurrStr = CurrStr.substr(42)
+    //     QueryStr = QueryStr + ',' + CurrStr
 
-    }
-    QueryStr = QueryStr.substr(1)
+    // }
+    // QueryStr = QueryStr.substr(1)
 
-    GetlCharacters = await Request("https://rickandmortyapi.com/api/character/" + QueryStr)
-    console.log(GetlCharacters)
+    // GetlCharacters = await Request("https://rickandmortyapi.com/api/character/" + QueryStr)
+    // console.log(GetlCharacters)
 }
 
-var Getlocation = {}
+var GetlocationRes = {}
 
 async function start() {
-    Getlocation = await Request("https://rickandmortyapi.com/api/location/")
+    var RequestString = "https://rickandmortyapi.com/api/location/"
+    var Getlocation = await Request(RequestString)
+    GetlocationRes = Getlocation.results
 
-    DisplayLocation(Getlocation.results)
+    while (Getlocation.info.next != "") {
+        RequestString = Getlocation.info.next
+        var Getlocation = await Request(RequestString)
+        GetlocationRes = GetlocationRes.concat(Getlocation.results)
+
+    }
+    console.log(GetlocationRes)
+
+    DisplayLocation(GetlocationRes)
 
 
     var rectangles = document.getElementsByTagName('rect');
