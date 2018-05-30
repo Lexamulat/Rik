@@ -23,7 +23,6 @@ function newElem(tag, params) {
     var elem = document.createElementNS ?
         document.createElementNS("http://www.w3.org/2000/svg", tag) :
         document.createElement(tag);
-
     for (var pr in params) {
         attr(elem, pr, params[pr]);
     }
@@ -41,11 +40,8 @@ function SetMax(locationRes, CharactersStack, summ, callback) {
 
     for (var i = 0; i < locationRes.length; i++) {
         summ += locationRes[i].residents.length + 1;
-
         if (CharactersStack[locationRes[i].residents.length] == undefined) {
             CharactersStack[locationRes[i].residents.length] = { 'max': 1, 'curr': 1, 'setX': 0 };
-            //replaced summ
-
         } else {
             CharactersStack[locationRes[i].residents.length].max++;
             CharactersStack[locationRes[i].residents.length].curr++;
@@ -88,11 +84,8 @@ function DisplayLocation(locationRes) {
 
 
     SetMax(locationRes, CharactersStack, summ, function(summ) {
-        console.log(summ)
         var widthOfOneElement = 100 / summ;
-        console.log(widthOfOneElement)
         var currentSetX = 0;
-
         TosetX(CharactersStack, widthOfOneElement, currentSetX, function() {
 
             var widthOfTheBlock = 0;
@@ -129,13 +122,6 @@ function DisplayLocation(locationRes) {
 
                 widthOfTheBlock = ((((locationRes[i].residents.length) + 1) * widthOfOneElement) * (CharactersStack[locationRes[i].residents.length].max));
                 summwidth += XsetX
-
-                console.log("---------")
-                console.log("kol", locationRes[i].residents.length)
-                console.log("X", XsetX)
-                console.log("wig", widthOfTheBlock)
-                console.log(XsetX + widthOfTheBlock)
-
                 var t = newElem('rect', {
                     x: XsetX + '%',
                     y: setY + '%',
@@ -166,21 +152,29 @@ function PopUP() {
         }
     }
     var PopElem = document.getElementById('popUp')
+
     PopElem.style.display = 'block';
     PopElem.innerHTML = Getlocation.results[i].name + ' has ' + Getlocation.results[i].residents.length + ' residents'
 
+    var XBlock = this.getAttribute('x')
+    XBlock = (XBlock.slice(0, -1))
+    var YBlock = this.getAttribute('y')
+    var WidthBlock = this.getAttribute('width')
+    WidthBlock = (WidthBlock.slice(0, -1))
+    var LeftOfThePop = Number(XBlock) + Number(WidthBlock)
+    if (LeftOfThePop > 90) {
+        PopElem.style.left = 51 + '%';
+        PopElem.style.top = 90 + '%';
+    } else {
+        PopElem.style.left = LeftOfThePop + '%';
+        PopElem.style.top = YBlock;
+    }
 
 }
 
 function PopDown() {
-
-    console.log("out")
-
     var PopElem = document.getElementById('popUp')
     PopElem.style.display = 'none';
-
-
-
 }
 var Getlocation = {}
 
@@ -188,10 +182,10 @@ async function start() {
     Getlocation = await Request("https://rickandmortyapi.com/api/location/")
 
     DisplayLocation(Getlocation.results)
-        // var rectangles = document.getElementById('r');
+
 
     var rectangles = document.getElementsByTagName('rect');
-    // console.log(rectangles)
+
     for (var i = 0; i < rectangles.length; i++) {
         rectangles[i].onmouseover = PopUP
         rectangles[i].onmouseout = PopDown
