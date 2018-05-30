@@ -186,6 +186,17 @@ function DisplayLocation(locationRes) {
 function PopUP() {
     console.log("in")
     console.log(this.getAttribute('uid'))
+    var SearchingId = this.getAttribute('uid')
+    console.log(Getlocation)
+    console.log(Getlocation.results.length)
+    for (var i = 0; i < Getlocation.results.length; i++) {
+        if (Getlocation.results[i].id == SearchingId) {
+            break;
+        }
+    }
+    var PopElem = document.getElementById('popUp')
+    PopElem.style.display = 'block';
+    PopElem.innerHTML = Getlocation.results[i].name
 
 
 }
@@ -195,18 +206,16 @@ function PopDown() {
     console.log("out")
 
 
+
 }
-var location1 = {}
+var Getlocation = {}
 
 async function start() {
-    const location = await Request("https://rickandmortyapi.com/api/location/")
-    console.log(location)
-    location1 = location
-    console.log(location1)
-        // console.log(location.results[0].residents.length)
-    DisplayLocation(location1.results)
+    Getlocation = await Request("https://rickandmortyapi.com/api/location/")
+
+    DisplayLocation(Getlocation.results)
         // var rectangles = document.getElementById('r');
-        // var rectangles = document.getElementsByClassName('popUp');
+
     var rectangles = document.getElementsByTagName('rect');
     // console.log(rectangles)
     for (var i = 0; i < rectangles.length; i++) {
