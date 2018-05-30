@@ -143,6 +143,7 @@ function DisplayLocation(locationRes) {
                         height: setHeight + '%',
                         stroke: 'black',
                         fill: 'transparent',
+                        uid: locationRes[i].id
                     })
                     // не добавляет класс к прямогуг 
                 t.innerHTML = locationRes[i].residents.length;
@@ -182,31 +183,49 @@ function DisplayLocation(locationRes) {
 // function handler(evet) {
 //     console.log("event")
 // }
-
-
-async function start() {
-    const location = await Request("https://rickandmortyapi.com/api/location/")
-    console.log(location.results)
-        // console.log(location.results[0].residents.length)
-        // DisplayLocation(location.results)
-        // var rectangles = document.getElementById('r');
-        // var rectangles = document.getElementsByClassName('popUp');
-    var rectangles = document.getElementsByTagName('rect');
-    console.log(rectangles)
-    for (var i = 0; i < rectangles.length; i++) {
-        rectangles[i].onmouseout = function(e) {
-            console.log("in")
-        }
-        rectangles[i].onmouseover = function(e) {
-            console.log("out")
-        }
-    }
-
-
-
+function PopUP() {
+    console.log("in")
+    console.log(this.getAttribute('uid'))
 
 
 }
+
+function PopDown() {
+
+    console.log("out")
+
+
+}
+var location1 = {}
+
+async function start() {
+    const location = await Request("https://rickandmortyapi.com/api/location/")
+    console.log(location)
+    location1 = location
+    console.log(location1)
+        // console.log(location.results[0].residents.length)
+    DisplayLocation(location1.results)
+        // var rectangles = document.getElementById('r');
+        // var rectangles = document.getElementsByClassName('popUp');
+    var rectangles = document.getElementsByTagName('rect');
+    // console.log(rectangles)
+    for (var i = 0; i < rectangles.length; i++) {
+        rectangles[i].onmouseover = PopUP
+        rectangles[i].onmouseout = PopDown
+    }
+}
+// rectangles[i].onmouseout = function(e) {
+//     console.log("out")
+// }
+// rectangles[i].onmouseover = function(e) {
+//     console.log("in")
+
+// }
+
+
+
+
+
 
 // window.onload = start
 // window.onload = function ()
