@@ -24,10 +24,13 @@ body {
 
 /* выносить окно за размеры блока и не давать мышке на него навестись */
 
-@media screen and (max-width:769px) {
+@media screen and (max-width:864px) {
     #popUp {
         font-size: 0.6em;
-        width: 20%;
+        width: 23%;
         height: 8%;
+    }
+    text {
+        font-size: 0.6em;
     }
 }

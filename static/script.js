@@ -131,8 +131,13 @@ function DisplayLocation(locationRes) {
                     fill: 'transparent',
                     uid: locationRes[i].id
                 })
-                t.innerHTML = locationRes[i].residents.length;
+                var txt = newElem('text', {
+                    x: XsetX + '%',
+                    y: (Number(setY) + 2) + '%'
+                })
+                txt.innerHTML = locationRes[i].residents.length;
                 one.appendChild(t);
+                one.appendChild(txt);
             }
 
         });
@@ -163,7 +168,7 @@ function PopUP() {
     WidthBlock = (WidthBlock.slice(0, -1))
     var LeftOfThePop = Number(XBlock) + Number(WidthBlock)
     if (LeftOfThePop > 90) {
-        PopElem.style.left = 51 + '%';
+        PopElem.style.left = 48 + '%';
         PopElem.style.top = 90 + '%';
     } else {
         PopElem.style.left = LeftOfThePop + '%';
