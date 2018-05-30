@@ -150,6 +150,9 @@ function DisplayLocation(locationRes) {
 
 function PopUP() {
     // console.log(window.event.clientX)
+    console.log(document.documentElement.clientWidth)
+
+
     var SearchingId = this.getAttribute('uid')
 
     for (var i = 0; i < GetlocationRes.length; i++) {
@@ -168,13 +171,17 @@ function PopUP() {
     var WidthBlock = this.getAttribute('width')
     WidthBlock = (WidthBlock.slice(0, -1))
     var LeftOfThePop = Number(XBlock) + Number(WidthBlock)
-    if (LeftOfThePop > 90) {
-        PopElem.style.left = 48 + '%';
-        PopElem.style.top = 50 + '%';
-    } else {
-        PopElem.style.left = LeftOfThePop + '%';
-        PopElem.style.top = (Number(YBlock) + 1) + '%';
-    }
+        // !! TODO need to fix out of range
+        // if (LeftOfThePop > 90) {
+        //     PopElem.style.left = 48 + '%';
+        //     PopElem.style.top = 50 + '%';
+        // } else {
+    PopElem.style.left = Number(window.event.clientX) + Number(WidthBlock) + 90;
+
+    // ЕСЛИ ПОПАЛ В НАЧАЛО БЛОКА, ЗНАЯ ШИРИНУ ВЫКИНУТЬ В СЕРЕДИНУ. ЕСЛИ БЛИЗКО К КРАЮ ВЫНЕСТИ ЧУТЬ ЗА ПРЕДЕЛ БЛОКА, ПРИ ПЕРЕХОДЕ ВС РАВНО ПЕРЕРИСУЕТСЯ
+
+    PopElem.style.top = window.event.clientY;
+    //}
 
 }
 
@@ -234,9 +241,20 @@ async function start() {
     for (var i = 0; i < rectangles.length; i++) {
         rectangles[i].onmouseover = PopUP
         rectangles[i].onmouseout = PopDown
-        rectangles[i].onclick = GetCharacters
+            // rectangles[i].onclick = GetCharacters
+    }
+
+
+    // !! ВЕРНИ ВЫЗОВ ПО КЛИКУ. УБИРАЛ ДЛЯ ТЕСТА
+
+    var POP = document.getElementById('popUp');
+    POP.onmouseover = function(e) {
+        console.log("out")
+        PopElem.style.display = 'none';
     }
 }
+
+
 // rectangles[i].onmouseout = function(e) {
 //     console.log("out")
 // }
