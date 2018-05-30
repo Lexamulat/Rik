@@ -149,6 +149,7 @@ function DisplayLocation(locationRes) {
 
 
 function PopUP() {
+    // console.log(window.event.clientX)
     var SearchingId = this.getAttribute('uid')
 
     for (var i = 0; i < GetlocationRes.length; i++) {
