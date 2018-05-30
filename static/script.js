@@ -137,22 +137,17 @@ function DisplayLocation(locationRes) {
                 console.log(XsetX + widthOfTheBlock)
 
                 var t = newElem('rect', {
-                        x: XsetX + '%',
-                        y: setY + '%',
-                        width: widthOfTheBlock + '%',
-                        height: setHeight + '%',
-                        stroke: 'black',
-                        fill: 'transparent',
-                        uid: locationRes[i].id
-                    })
-                    // не добавляет класс к прямогуг 
+                    x: XsetX + '%',
+                    y: setY + '%',
+                    width: widthOfTheBlock + '%',
+                    height: setHeight + '%',
+                    stroke: 'black',
+                    fill: 'transparent',
+                    uid: locationRes[i].id
+                })
                 t.innerHTML = locationRes[i].residents.length;
                 one.appendChild(t);
             }
-
-
-            // t.innerHTML = key;
-            // one.appendChild(t);
 
         });
 
@@ -162,33 +157,9 @@ function DisplayLocation(locationRes) {
 
 
 
-// $('.info').hover(
-//     function() {
-//       let top = $(this).offset().top + $(this).height();
-//       let left = $(this).offset().left;
-//       let data = $(this).data('modal-text');
-
-//       let div = document.createElement('div');
-//       div.id = 'modal';
-//       $(div).css('top', top);
-//       $(div).css('left', left);
-//       $(div).html(data);
-//       $('body').append(div);
-//     },
-//     function() {
-//       $('#modal').remove();
-//     });
-// document.body.onmouseover = handler
-
-// function handler(evet) {
-//     console.log("event")
-// }
 function PopUP() {
-    console.log("in")
-    console.log(this.getAttribute('uid'))
     var SearchingId = this.getAttribute('uid')
-    console.log(Getlocation)
-    console.log(Getlocation.results.length)
+
     for (var i = 0; i < Getlocation.results.length; i++) {
         if (Getlocation.results[i].id == SearchingId) {
             break;
@@ -196,7 +167,7 @@ function PopUP() {
     }
     var PopElem = document.getElementById('popUp')
     PopElem.style.display = 'block';
-    PopElem.innerHTML = Getlocation.results[i].name
+    PopElem.innerHTML = Getlocation.results[i].name + ' has ' + Getlocation.results[i].residents.length + ' residents'
 
 
 }
