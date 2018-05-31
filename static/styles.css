@@ -23,6 +23,10 @@ body {
     z-index: 999;
 }
 
+image {
+    background-color: bisque;
+}
+
 text {
     font-size: 0.7em;
 }
@@ -32,7 +36,7 @@ text {
 
 @media screen and (max-width:767px) {
     #popUp {
-        font-size: 0.4em;
+        font-size: 0.3em;
         width: 24%;
         height: 5%;
     }
