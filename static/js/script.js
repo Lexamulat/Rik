@@ -202,17 +202,17 @@ async function start() {
     console.log("main.start")
     console.log(GetlocationRes)
     var RequestString = "https://rickandmortyapi.com/api/location/"
-    var Getlocation = await Request(RequestString)
+        // var Getlocation = await Request(RequestString)
 
-    var Data = MyReq(RequestString)
-    console.log("Data", Data)
+    var Getlocation = MyReq(RequestString)
+        // console.log("Data", Data)
 
     GetlocationRes = Getlocation.results
     console.log(GetlocationRes)
 
     while (Getlocation.info.next != "") {
         RequestString = Getlocation.info.next
-        var Getlocation = await Request(RequestString)
+        Getlocation = MyReq(RequestString)
         GetlocationRes = GetlocationRes.concat(Getlocation.results)
 
     }
@@ -248,8 +248,8 @@ async function start() {
 
 
 
-
+window.onload = start;
 
 // window.onload = start
 // window.onload = function ()
-$(document).ready(start);
+// $(document).ready(start);

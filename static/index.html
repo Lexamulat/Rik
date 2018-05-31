@@ -1,89 +1,18 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/display.js"></script>
 
-    <!-- <script src="characters.js"></script> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 </head>
 
 
 <body>
     <svg id="one" class="full">  
-           
-     <!-- <rect x="23.262032085561497%" y="0%" width="7.486631016042781%" height="100%" stroke="black" fill="transparent"> </rect>
-    <rect x="1.0695187165775402%" y="0%" width="1.6042780748663104%" height="33.333333333333336%" stroke="black" fill="transparent">1</rect>
-    <rect x="47.32620320855615%" y="0%" width="24.331550802139038%" height="100%" stroke="black" fill="transparent">90</rect>
-    <rect x="8.556149732620321%" y="0%" width="5.347593582887701%" height="50%" stroke="black" fill="transparent">9</rect>
-    <rect x="16.844919786096256%" y="0%" width="6.417112299465241%" height="50%" stroke="black" fill="transparent">11</rect>
-    <rect x="30.74866310160428%" y="0%" width="16.577540106951872%" height="100%" stroke="black" fill="transparent">61</rect>
-    <rect x="2.6737967914438503%" y="0%" width="2.1390374331550803%" height="50%" stroke="black" fill="transparent">3</rect>
-    <rect x="13.903743315508022%" y="0%" width="2.9411764705882355%" height="100%" stroke="black" fill="transparent">10</rect>
-    <rect x="4.81283422459893%" y="0%" width="1.3368983957219251%" height="100%" stroke="black" fill="transparent">4</rect>
-    <rect x="1.0695187165775402%" y="33.333333333333336%" width="1.6042780748663104%" height="33.333333333333336%" stroke="black" fill="transparent">1</rect>
-    <rect x="1.0695187165775402%" y="66.66666666666667%" width="1.6042780748663104%" height="33.333333333333336%" stroke="black" fill="transparent">1</rect>
-    <rect x="0%" y="0%" width="1.0695187165775402%" height="25%" stroke="black" fill="transparent">0</rect>
-    <rect x="16.844919786096256%" y="50%" width="6.417112299465241%" height="50%" stroke="black" fill="transparent">11</rect>
-    <rect x="2.6737967914438503%" y="50%" width="2.1390374331550803%" height="50%" stroke="black" fill="transparent">3</rect>
-    <rect x="0%" y="25%" width="1.0695187165775402%" height="25%" stroke="black" fill="transparent">0</rect>
-    <rect x="8.556149732620321%" y="50%" width="5.347593582887701%" height="50%" stroke="black" fill="transparent">9</rect>
-    <rect x="0%" y="50%" width="1.0695187165775402%" height="25%" stroke="black" fill="transparent">0</rect>
-    <rect x="6.149732620320855%" y="0%" width="2.4064171122994655%" height="100%" stroke="black" fill="transparent">8</rect>
-    <rect x="0%" y="75%" width="1.0695187165775402%" height="25%" stroke="black" fill="transparent">0</rect>
-    <rect x="71.65775401069519%" y="0%" width="28.342245989304814%" height="100%" stroke="black" fill="transparent">105</rect>
-    <text x="71.65775401069519%" y="2%" >TEXT</text> -->
-     <div id="popUp">
-
-    </div>
-    
+     <div id="popUp"></div>
     </svg>
-
-
-
-
-
-    <!-- <svg id="one" class="full">  
-           
-            <rect x="23.262032085561497%" y="0%" width="7.486631016042781%" height="100%" stroke="black" fill="transparent"> </rect>
-           <rect x="1.0695187165775402%" y="0%" width="1.6042780748663104%" height="33.333333333333336%" stroke="black" fill="transparent">1</rect>
-           <rect x="47.32620320855615%" y="0%" width="24.331550802139038%" height="100%" stroke="black" fill="transparent">90</rect>
-           <rect x="8.556149732620321%" y="0%" width="5.347593582887701%" height="50%" stroke="black" fill="transparent">9</rect>
-           <rect x="16.844919786096256%" y="0%" width="6.417112299465241%" height="50%" stroke="black" fill="transparent">11</rect>
-           <rect x="30.74866310160428%" y="0%" width="16.577540106951872%" height="100%" stroke="black" fill="transparent">61</rect>
-           <rect x="2.6737967914438503%" y="0%" width="2.1390374331550803%" height="50%" stroke="black" fill="transparent">3</rect>
-           <rect x="13.903743315508022%" y="0%" width="2.9411764705882355%" height="100%" stroke="black" fill="transparent">10</rect>
-           <rect x="4.81283422459893%" y="0%" width="1.3368983957219251%" height="100%" stroke="black" fill="transparent">4</rect>
-           <rect x="1.0695187165775402%" y="33.333333333333336%" width="1.6042780748663104%" height="33.333333333333336%" stroke="black" fill="transparent">1</rect>
-           <rect x="1.0695187165775402%" y="66.66666666666667%" width="1.6042780748663104%" height="33.333333333333336%" stroke="black" fill="transparent">1</rect>
-           <rect x="0%" y="0%" width="1.0695187165775402%" height="25%" stroke="black" fill="transparent">0</rect>
-           <rect x="16.844919786096256%" y="50%" width="6.417112299465241%" height="50%" stroke="black" fill="transparent">11</rect>
-           <rect x="2.6737967914438503%" y="50%" width="2.1390374331550803%" height="50%" stroke="black" fill="transparent">3</rect>
-           <rect x="0%" y="25%" width="1.0695187165775402%" height="25%" stroke="black" fill="transparent">0</rect>
-           <rect x="8.556149732620321%" y="50%" width="5.347593582887701%" height="50%" stroke="black" fill="transparent">9</rect>
-           <rect x="0%" y="50%" width="1.0695187165775402%" height="25%" stroke="black" fill="transparent">0</rect>
-           <rect x="6.149732620320855%" y="0%" width="2.4064171122994655%" height="100%" stroke="black" fill="transparent">8</rect>
-           <rect x="0%" y="75%" width="1.0695187165775402%" height="25%" stroke="black" fill="transparent">0</rect>
-           <rect x="71.65775401069519%" y="0%" width="28.342245989304814%" height="100%" stroke="black" fill="transparent">105</rect>
-           <text x="71.65775401069519%" y="2%" >TEXT</text>
-           </svg> -->
-
-
-
-    <!-- 
-
-
-    <svg id="two" class="full"> 
-            <rect x="0%" y="0" width="10%" height="100%" stroke="black" fill="transparent" /> 
-            <rect x="10%" y="0" width="10%" height="100%" stroke="black" fill="transparent"/> 
-           
-            
-             
-             
-        </svg> -->
-
 
 </body>
 

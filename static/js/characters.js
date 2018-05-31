@@ -2,7 +2,8 @@ async function getCharactersInfo(callback) {
 
     //!! Take Get Params eraise @?uid=3@ to 3
     var QueryStr = (document.location.search).substr(10)
-    GetCharactersData = await Request("https://rickandmortyapi.com/api/character/" + QueryStr)
+    GetCharactersData = MyReq("https://rickandmortyapi.com/api/character/" + QueryStr)
+        // GetCharactersData = await Request("https://rickandmortyapi.com/api/character/" + QueryStr)
     console.log(GetCharactersData)
     callback()
 }
