@@ -61,7 +61,8 @@ function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
                 width: XSideOfASquareInPerc + '%',
                 height: YSideOfASquareInPerc + '%',
                 fill: "bisque",
-                id: "backButtn"
+                id: "backButtn",
+                onclick: "Redir()"
             })
             var txt = newElem('text', {
                 x: 0 + '%',
@@ -81,7 +82,8 @@ function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
                 y: YInsertPosition + '%',
                 width: XSideOfASquareInPerc + '%',
                 height: YSideOfASquareInPerc + '%',
-                href: GetCharactersData[i - 1].image
+                href: GetCharactersData[i - 1].image,
+                name: GetCharactersData[i - 1].name
 
             })
             one.appendChild(t);
@@ -89,6 +91,10 @@ function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
 
 
     }
+}
+
+function Redirect() {
+    document.location.href = "index.html"
 }
 
 function CountBlocksSize() {
@@ -141,6 +147,11 @@ function CountBlocksSize() {
 }
 
 
+function ImgPopUP() {
+
+    var SearchingId = this.getAttribute('uid')
+}
+
 
 var GetCharactersData = {}
 
@@ -151,17 +162,26 @@ async function start() {
 
     GetCharactersInfo(function() {
         CountBlocksSize()
+
         window.onresize = function(e) {
-            console.log("in")
-            one.innerHTML = '';
-            CountBlocksSize()
-        }
-        var GoBack = document.getElementById('backButtn');
-        GoBack.onclick = function(e) {
-            document.location.href = "index.html"
-        }
+                GoBack = document.getElementById('backButtn');
+                console.log("in")
+                one.innerHTML = '';
+                CountBlocksSize()
+                GoBack = document.getElementById('backButtn');
+            }
+            // var GoBack = document.getElementById('backButtn');
+            // GoBack.onclick = function() {
+            //         document.location.href = "index.html"
+            //     }
+            // var imgs = document.getElementsByTagName('image');
+            // for (var i = 0; i < rectangles.length; i++) {
+            //     rectangles[i].onmouseover = ImgPopUP
+            //         // rectangles[i].onmouseout = ImgPopDown
+            // }
     });
     // window.onresize = CountBlocksSize
+
 
 }
 

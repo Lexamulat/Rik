@@ -121,6 +121,7 @@ function PopUP() {
     var PopElem = document.getElementById('popUp')
 
     PopElem.style.display = 'block';
+
     PopElem.innerHTML = GetlocationRes[i].name + ' has ' + GetlocationRes[i].residents.length + ' residents'
 
     var XBlockInPercent = this.getAttribute('x')
