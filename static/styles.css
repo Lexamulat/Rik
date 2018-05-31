@@ -32,9 +32,9 @@ text {
 
 @media screen and (max-width:767px) {
     #popUp {
-        font-size: 0.6em;
+        font-size: 0.4em;
         width: 24%;
-        height: 8%;
+        height: 5%;
     }
     text {
         font-size: 0.6em;

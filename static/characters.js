@@ -38,6 +38,7 @@ async function DisplayCharacters() {
 
 
 function start() {
+    Rt()
     console.log("Characters start")
 }
 

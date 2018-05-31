@@ -169,18 +169,37 @@ function PopUP() {
         // var LeftOfThePop = Number(XBlockInPercent) + Number(WidthBlockInPercent)
         // !! TODO need to fix out of range
     var ClientWidthInPix = Number(document.documentElement.clientWidth)
+    var ClientHeightInPix = Number(document.documentElement.clientHeight)
     var ClientXCoordInPix = Number(window.event.clientX)
-    var ProcFromLeft = (((ClientWidthInPix - ClientXCoordInPix) / ClientWidthInPix) * 100)
-    console.log(ProcFromLeft)
-    var ShiftInPx = (ClientWidthInPix / 100) * 2
+    var ClientYCoordInPix = Number(window.event.clientY)
+    var PercFromTop = (((ClientHeightInPix - ClientYCoordInPix) / ClientHeightInPix) * 100)
+
     if ((Number(XBlockInPercent) + Number(WidthBlockInPercent)) > 90) {
+        //width of the PopUp window from css in percent
         PopElem.style.left = (100 - Number(WidthBlockInPercent) - 13) + '%';
     } else {
-        PopElem.style.left = ClientXCoordInPix + ShiftInPx
+        var XShiftInPx = (ClientWidthInPix / 100) * 2
+        PopElem.style.left = ClientXCoordInPix + XShiftInPx
     }
-    PopElem.style.top = window.event.clientY;
+    if (PercFromTop < 10) {
+        console.log(getComputedStyle(PopElem).height)
+            //height of the PopUp window from css in percent
+        var YShiftInPx = (ClientHeightInPix / 100) * 6
+        PopElem.style.top = window.event.clientY - YShiftInPx;
+
+        console.log("top")
+    } else {
+        PopElem.style.top = window.event.clientY;
+
+    }
+
 
 }
+
+function Rt() {
+    console.log("11111111111111")
+}
+
 
 function PopDown() {
     var PopElem = document.getElementById('popUp')
