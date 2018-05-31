@@ -1,45 +1,38 @@
-async function Request(url, postData) {
-    return new Promise(resolve => {
-        $.get(url, JSON.stringify(postData), function(data, textStatus) {
-            resolve(data)
-        }, "json");
-    });
-}
+// async function Request(url, postData) {
+//     return new Promise(resolve => {
+//         $.get(url, JSON.stringify(postData), function(data, textStatus) {
+//             resolve(data)
+//         }, "json");
+//     });
+// }
 
 async function DisplayCharacters() {
-    console.log(Getlocation)
-    var SearchingId = this.getAttribute('uid')
+    console.log("Getlocation")
 
-    for (var i = 0; i < Getlocation.results.length; i++) {
-        if (Getlocation.results[i].id == SearchingId) {
-            break;
-        }
-    }
-    var curr = i
+    console.log(document.location.search)
+        //!! Take Get Params eraise @?uid=3@ to 3
+    var SearchingId = (document.location.search).substr(10)
+    console.log(SearchingId)
 
-    var QueryStr = ''
-    var CurrStr = ''
 
-    for (var j = 0; j < Getlocation.results[curr].residents.length; j++) {
 
-        CurrStr = Getlocation.results[curr].residents[j]
-        CurrStr = CurrStr.substr(42)
-        QueryStr = QueryStr + ',' + CurrStr
+    // GetlCharacters = await Request("https://rickandmortyapi.com/api/character/" + QueryStr)
 
-    }
-    QueryStr = QueryStr.substr(1)
-
-    GetlCharacters = await Request("https://rickandmortyapi.com/api/character/" + QueryStr)
-    console.log(GetlCharacters)
 
 }
 
 
 
 
-function start() {
-    Rt()
+async function start() {
+
     console.log("Characters start")
+    DisplayCharacters()
+        // var RequestString = "https://rickandmortyapi.com/api/location/"
+        // var Characters = await Request(RequestString)
+        // console.log(GetlocationRes)
+
+    // DisplayCharacters()
 }
 
 

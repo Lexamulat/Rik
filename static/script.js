@@ -1,12 +1,3 @@
-async function Request(url, postData) {
-    return new Promise(resolve => {
-        $.get(url, JSON.stringify(postData), function(data, textStatus) {
-            resolve(data)
-        }, "json");
-    });
-}
-
-
 function attr(el, at, value) {
     at = { 'for': 'htmlFor', 'class': 'className' }[at] || at;
     if (!value) {
@@ -196,9 +187,7 @@ function PopUP() {
 
 }
 
-function Rt() {
-    console.log("11111111111111")
-}
+
 
 
 function PopDown() {
@@ -207,39 +196,43 @@ function PopDown() {
 }
 
 async function GetCharacters() {
-    document.location.href = "characters.html";
-    // console.log(Getlocation)
-    // var SearchingId = this.getAttribute('uid')
+    var SearchingId = this.getAttribute('uid')
 
-    // for (var i = 0; i < Getlocation.results.length; i++) {
-    //     if (Getlocation.results[i].id == SearchingId) {
-    //         break;
-    //     }
-    // }
-    // var curr = i
+    for (var i = 0; i < GetlocationRes.length; i++) {
+        if (GetlocationRes[i].id == SearchingId) {
+            break;
+        }
+    }
+    var curr = i
 
-    // var QueryStr = ''
-    // var CurrStr = ''
+    var QueryStr = ''
+    var CurrStr = ''
 
-    // for (var j = 0; j < Getlocation.results[curr].residents.length; j++) {
+    for (var j = 0; j < GetlocationRes[curr].residents.length; j++) {
 
-    //     CurrStr = Getlocation.results[curr].residents[j]
-    //     CurrStr = CurrStr.substr(42)
-    //     QueryStr = QueryStr + ',' + CurrStr
+        CurrStr = GetlocationRes[curr].residents[j]
+        CurrStr = CurrStr.substr(42)
+        QueryStr = QueryStr + ',' + CurrStr
 
-    // }
-    // QueryStr = QueryStr.substr(1)
+    }
+    QueryStr = QueryStr.substr(1)
 
     // GetlCharacters = await Request("https://rickandmortyapi.com/api/character/" + QueryStr)
     // console.log(GetlCharacters)
+
+
+    document.location.href = "characters.html?QueryStr=" + QueryStr;
 }
 
-var GetlocationRes = {}
 
+var GetlocationRes = {}
 async function start() {
+    console.log("main.start")
+    console.log(GetlocationRes)
     var RequestString = "https://rickandmortyapi.com/api/location/"
     var Getlocation = await Request(RequestString)
     GetlocationRes = Getlocation.results
+    console.log(GetlocationRes)
 
     while (Getlocation.info.next != "") {
         RequestString = Getlocation.info.next
@@ -257,11 +250,8 @@ async function start() {
     for (var i = 0; i < rectangles.length; i++) {
         rectangles[i].onmouseover = PopUP
         rectangles[i].onmouseout = PopDown
-            // rectangles[i].onclick = GetCharacters
+        rectangles[i].onclick = GetCharacters
     }
-
-
-    // !! ВЕРНИ ВЫЗОВ ПО КЛИКУ. УБИРАЛ ДЛЯ ТЕСТА
 
     var POP = document.getElementById('popUp');
     POP.onmouseover = function(e) {
