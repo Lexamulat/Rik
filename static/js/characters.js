@@ -65,7 +65,7 @@ function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
             var txt = newElem('text', {
                 x: 5 + '%',
                 y: 5 + '%',
-                style: "font-size: 3em;"
+                style: "font-size: 1em;"
 
             })
             one.appendChild(t);
@@ -149,6 +149,13 @@ async function start() {
     GetCharactersInfo(function() {
         CountBlocksSize()
     });
+    // window.onresize = CountBlocksSize
+    window.onresize = function(e) {
+        console.log("in")
+        one.innerHTML = '';
+        CountBlocksSize()
+
+    }
 }
 
 

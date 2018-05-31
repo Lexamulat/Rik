@@ -25,6 +25,9 @@ body {
 
 image {
     background-color: bisque;
+    /* display: block;
+    max-width: 100%;
+    margin: 0 auto; */
 }
 
 text {
