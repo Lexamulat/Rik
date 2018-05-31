@@ -31,29 +31,35 @@ function CanIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, 
 
 }
 
-function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, NumOfSquares) {
+function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares) {
     console.log("in display func")
 
+
+    var XSideOfASquareInPerc = ((SideOfASquareInPix / ClientWidthInPix) * 100),
+        YSideOfASquareInPerc = ((SideOfASquareInPix / ClientHeightInPix) * 100);
+
+    // console.log("Perc", SideOfASquareInPerc)
 
     var XInsertPosition = 0,
         YInsertPosition = 0,
         j = 0;
+
     for (var i = 0; i < NumOfSquares; i++) {
 
-        XInsertPosition = j * SideOfASquareInPix
+        XInsertPosition = j * XSideOfASquareInPerc
         j++;
-        if ((XInsertPosition + SideOfASquareInPix) >= ClientWidthInPix) {
+        if ((XInsertPosition + XSideOfASquareInPerc) >= 100) {
             j = 1;
-            YInsertPosition += SideOfASquareInPix
+            YInsertPosition += YSideOfASquareInPerc
             XInsertPosition = 0;
         }
 
 
         var t = newElem('image', {
-            x: XInsertPosition + 'px',
-            y: YInsertPosition + 'px',
-            width: SideOfASquareInPix,
-            height: SideOfASquareInPix,
+            x: XInsertPosition + '%',
+            y: YInsertPosition + '%',
+            width: XSideOfASquareInPerc + '%',
+            height: YSideOfASquareInPerc + '%',
         })
 
         one.appendChild(t);
@@ -107,7 +113,7 @@ function CountBlocksSize() {
     }
     console.log(SideOfASquareInPix)
 
-    DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, NumOfSquares)
+    DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
 }
 
 
