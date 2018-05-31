@@ -3,7 +3,9 @@ function setMax(locationRes, CharactersStack, summ, callback) {
     for (var i = 0; i < locationRes.length; i++) {
         summ += locationRes[i].residents.length + 1;
         if (CharactersStack[locationRes[i].residents.length] == undefined) {
+
             CharactersStack[locationRes[i].residents.length] = { 'max': 1, 'curr': 1, 'setX': 0 };
+
         } else {
             CharactersStack[locationRes[i].residents.length].max++;
             CharactersStack[locationRes[i].residents.length].curr++;
@@ -54,26 +56,11 @@ function displayLocation(locationRes) {
             var XsetX = 0;
             var setY = 0;
             var setHeight = 0;
-
-            // for (var key in CharactersStack) {
-            //     widthOfTheBlock = ((key * widthOfOneElement) + widthOfOneElement);
-            //     setHeight = (100 / (CharactersStack[key].max));
-            //     setY = CharactersStack[key].max - CharactersStack[key].curr
-
-            //     var t = newElem('rect', {
-            //         x: CharactersStack[key].setX + '%',
-            //         y: setY + '%',
-            //         width: widthOfTheBlock + '%',
-            //         height: setHeight + '%',
-            //         stroke: 'black',
-            //         fill: 'transparent'
-            //     })
             var tmp = 0
             var summwidth = 0;
-            console.log(CharactersStack)
+
             for (var i = 0; i < locationRes.length; i++) {
                 tmp = locationRes[i].residents.length
-                    // widthOfTheBlock = (locationRes[i].residents.length) * widthOfOneElement;
                 setHeight = (100 / CharactersStack[locationRes[i].residents.length].max);
                 XsetX = CharactersStack[locationRes[i].residents.length].setX
 
@@ -91,11 +78,14 @@ function displayLocation(locationRes) {
                     fill: 'transparent',
                     uid: locationRes[i].id
                 })
+
                 var txt = newElem('text', {
                     x: XsetX + '%',
                     y: (Number(setY) + 2) + '%'
                 })
+
                 txt.innerHTML = locationRes[i].residents.length;
+
                 one.appendChild(t);
                 one.appendChild(txt);
             }
@@ -109,8 +99,6 @@ function displayLocation(locationRes) {
 
 
 function popUP() {
-    // console.log(window.event.clientX)
-    console.log(document.documentElement.clientWidth)
     var SearchingId = this.getAttribute('uid')
 
     for (var i = 0; i < GetlocationRes.length; i++) {
@@ -125,31 +113,31 @@ function popUP() {
     PopElem.innerHTML = GetlocationRes[i].name + ' has ' + GetlocationRes[i].residents.length + ' residents'
 
     var XBlockInPercent = this.getAttribute('x')
+        // !! eraise % from x=26.4544%
     XBlockInPercent = (XBlockInPercent.slice(0, -1))
-        // var YBlockInPercent = this.getAttribute('y')
+
     var WidthBlockInPercent = this.getAttribute('width')
     WidthBlockInPercent = (WidthBlockInPercent.slice(0, -1))
-
+        // !! get current mouse coordinates and screen params
     var ClientWidthInPix = Number(document.documentElement.clientWidth)
     var ClientHeightInPix = Number(document.documentElement.clientHeight)
     var ClientXCoordInPix = Number(window.event.clientX)
     var ClientYCoordInPix = Number(window.event.clientY)
+
     var PercFromTop = (((ClientHeightInPix - ClientYCoordInPix) / ClientHeightInPix) * 100)
 
     if ((Number(XBlockInPercent) + Number(WidthBlockInPercent)) > 90) {
-        //width of the PopUp window from css in percent
+        //!! width of the PopUp window from css in percent
         PopElem.style.left = (100 - Number(WidthBlockInPercent) - 13) + '%';
     } else {
         var XShiftInPx = (ClientWidthInPix / 100) * 2
         PopElem.style.left = ClientXCoordInPix + XShiftInPx
     }
     if (PercFromTop < 15) {
-        console.log(getComputedStyle(PopElem).height)
-            //height of the PopUp window from css in percent
+        //!! height of the PopUp window from css in percent
         var YShiftInPx = (ClientHeightInPix / 100) * 15
         PopElem.style.top = window.event.clientY - YShiftInPx;
 
-        console.log("top")
     } else {
         PopElem.style.top = window.event.clientY;
 
@@ -188,8 +176,6 @@ async function GetCharacters() {
     }
     QueryStr = QueryStr.substr(1)
 
-    // GetlCharacters = await Request("https://rickandmortyapi.com/api/character/" + QueryStr)
-    // console.log(GetlCharacters)
 
 
     document.location.href = "characters.html?QueryStr=" + QueryStr;
@@ -199,16 +185,12 @@ async function GetCharacters() {
 var GetlocationRes = {}
 
 async function start() {
-    console.log("main.start")
-    console.log(GetlocationRes)
+
     var RequestString = "https://rickandmortyapi.com/api/location/"
-        // var Getlocation = await Request(RequestString)
 
     var Getlocation = MyReq(RequestString)
-        // console.log("Data", Data)
 
     GetlocationRes = Getlocation.results
-    console.log(GetlocationRes)
 
     while (Getlocation.info.next != "") {
         RequestString = Getlocation.info.next
@@ -216,7 +198,6 @@ async function start() {
         GetlocationRes = GetlocationRes.concat(Getlocation.results)
 
     }
-    console.log(GetlocationRes)
 
     displayLocation(GetlocationRes)
 
@@ -229,12 +210,9 @@ async function start() {
         rectangles[i].onclick = GetCharacters
     }
 
-    // var POP = document.getElementById('popUp');
-    // POP.onmouseover = function(e) {
-    //     console.log("out")
-    //     this.style.display = 'none';
-    // }
+
 }
+window.onload = start;
 
 
 // rectangles[i].onmouseout = function(e) {
@@ -244,12 +222,3 @@ async function start() {
 //     console.log("in")
 
 // }
-
-
-
-
-window.onload = start;
-
-// window.onload = start
-// window.onload = function ()
-// $(document).ready(start);
