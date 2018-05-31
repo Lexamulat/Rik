@@ -1,10 +1,7 @@
 async function getCharactersInfo(callback) {
 
-    //!! Take Get Params eraise @?uid=3@ to 3
     var QueryStr = (document.location.search).substr(10)
     GetCharactersData = MyReq("https://rickandmortyapi.com/api/character/" + QueryStr)
-        // GetCharactersData = await Request("https://rickandmortyapi.com/api/character/" + QueryStr)
-    console.log(GetCharactersData)
     callback()
 }
 
@@ -12,16 +9,19 @@ function canIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, 
     var XInsertPosition = 0,
         YInsertPosition = 0,
         j = 0;
+
     for (var i = 0; i < NumOfSquares; i++) {
+
         XInsertPosition = j * SideOfASquareInPix
         j++;
+
+        //    !!dont let the block get out of the screen size
         if ((XInsertPosition + SideOfASquareInPix) >= ClientWidthInPix) {
             j = 1;
             YInsertPosition += SideOfASquareInPix;
             XInsertPosition = 0;
         }
 
-        // console.log(XInsertPosition, YInsertPosition)
         if (YInsertPosition + SideOfASquareInPix >= ClientHeightInPix) {
             return 0;
         }
@@ -33,18 +33,16 @@ function canIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, 
 }
 
 function displayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares) {
-    console.log("in display func")
 
 
     var XSideOfASquareInPerc = ((SideOfASquareInPix / ClientWidthInPix) * 100),
         YSideOfASquareInPerc = ((SideOfASquareInPix / ClientHeightInPix) * 100);
 
-    // console.log("Perc", SideOfASquareInPerc)
 
     var XInsertPosition = 0,
         YInsertPosition = 0,
         j = 0;
-    console.log(GetCharactersData)
+
     for (var i = 0; i < NumOfSquares; i++) {
 
         XInsertPosition = j * XSideOfASquareInPerc
@@ -54,7 +52,7 @@ function displayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
             YInsertPosition += YSideOfASquareInPerc
             XInsertPosition = 0;
         }
-
+        // !!сreate button: back
         if (i === 0) {
             var t = newElem('rect', {
                 x: XInsertPosition + '%',
@@ -77,7 +75,10 @@ function displayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
             txt.innerHTML = "Back";
 
         } else {
+            // !! if obj have only one value 
             if (GetCharactersData.length == undefined) {
+
+                // !! if obj have no values 
                 if (GetCharactersData.image == undefined) {
                     return;
                 } else {
@@ -114,7 +115,6 @@ function redirect() {
 }
 
 function countBlocksSize() {
-    // console.log(GetCharactersData.length);
     if (GetCharactersData.length == undefined) {
         var GetCharactersDatalength = 1;
     } else {
@@ -130,12 +130,11 @@ function countBlocksSize() {
         //!! RESERVED first square for @back@
         NumOfSquares = Number(GetCharactersDatalength) + 1;
 
-    // !!DIVIDED the algorithm into 2 parts. For optimize the search for the optimal length of the square side
+    // !!DIVIDED the algorithm into 2 parts. For optimize the process of searching for the optimal length of the square side
     while ((NumOfSquares * AreaOfOneSquare) < ScreenArea) {
 
         SideOfASquareInPix = SideOfASquareInPix * 2;
         AreaOfOneSquare = SideOfASquareInPix * SideOfASquareInPix;
-        // console.log("first")
     }
 
     SideOfASquareInPix = SideOfASquareInPix / 2;
@@ -144,26 +143,22 @@ function countBlocksSize() {
     while ((NumOfSquares * AreaOfOneSquare) < ScreenArea) {
         SideOfASquareInPix++;
         AreaOfOneSquare = SideOfASquareInPix * SideOfASquareInPix;
-        // console.log("second")
     }
     SideOfASquareInPix--;
     AreaOfOneSquare = SideOfASquareInPix * SideOfASquareInPix;
 
-    console.log("screen", ScreenArea)
-    console.log("num", NumOfSquares)
-    console.log("side size", SideOfASquareInPix)
-    console.log("s of squares", NumOfSquares * (SideOfASquareInPix * SideOfASquareInPix))
+    // console.log("screen", ScreenArea)
+    // console.log("num", NumOfSquares)
+    // console.log("side size", SideOfASquareInPix)
+    // console.log("s of squares", NumOfSquares * (SideOfASquareInPix * SideOfASquareInPix))
 
-    // canIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
     var can = canIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
     console.log("can", can)
 
     while (can == 0) {
         SideOfASquareInPix--;
         can = canIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
-        console.log("can", can)
     }
-    console.log(SideOfASquareInPix)
 
     displayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
 }
@@ -176,20 +171,22 @@ function imgPopUp() {
 
     PopElem.style.display = 'block';
     PopElem.innerHTML = Description
+
     var XBlockInPercent = this.getAttribute('x')
+        // !! eraise % from x=26.4544%
     XBlockInPercent = (XBlockInPercent.slice(0, -1))
-        // var YBlockInPercent = this.getAttribute('y')
+
     var WidthBlockInPercent = this.getAttribute('width')
     WidthBlockInPercent = (WidthBlockInPercent.slice(0, -1))
 
-    var ClientWidthInPix = Number(document.documentElement.clientWidth)
-    var ClientHeightInPix = Number(document.documentElement.clientHeight)
-    var ClientXCoordInPix = Number(window.event.clientX)
-    var ClientYCoordInPix = Number(window.event.clientY)
+    var ClientWidthInPix = Number(document.documentElement.clientWidth),
+        ClientHeightInPix = Number(document.documentElement.clientHeight),
+        ClientXCoordInPix = Number(window.event.clientX),
+        ClientYCoordInPix = Number(window.event.clientY);
+
     var PercFromTop = (((ClientHeightInPix - ClientYCoordInPix) / ClientHeightInPix) * 100)
 
     if ((Number(XBlockInPercent) + Number(WidthBlockInPercent)) > 90) {
-        //width of the PopUp window from css in percent
         PopElem.style.left = (100 - Number(WidthBlockInPercent) - 13) + '%';
     } else {
         var XShiftInPx = (ClientWidthInPix / 100) * 2
@@ -199,6 +196,7 @@ function imgPopUp() {
         console.log(getComputedStyle(PopElem).height)
             //height of the PopUp window from css in percent
         var YShiftInPx = (ClientHeightInPix / 100) * 15
+            // !! TODO can get cuur val in px, screen in px and calc width in %
         PopElem.style.top = window.event.clientY - YShiftInPx;
 
         console.log("top")
@@ -219,15 +217,13 @@ var GetCharactersData = {}
 
 async function start() {
 
-    console.log("Characters start")
-
-
     getCharactersInfo(function() {
         countBlocksSize()
         var imgs = document.getElementsByTagName('image');
         window.onresize = function(e) {
-            console.log("in")
+
             one.innerHTML = '';
+
             countBlocksSize()
             for (var i = 0; i < imgs.length; i++) {
                 imgs[i].onmouseover = imgPopUp
@@ -236,19 +232,13 @@ async function start() {
         }
 
 
-
-
         for (var i = 0; i < imgs.length; i++) {
             imgs[i].onmouseover = imgPopUp
             imgs[i].onmouseout = imgPopDown
         }
     });
-    // window.onresize = countBlocksSize
 
 
 }
-
-
-
 
 window.onload = start;
