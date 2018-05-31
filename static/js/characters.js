@@ -76,15 +76,31 @@ function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
             txt.innerHTML = "Back";
 
         } else {
-            var t = newElem('image', {
-                x: XInsertPosition + '%',
-                y: YInsertPosition + '%',
-                width: XSideOfASquareInPerc + '%',
-                height: YSideOfASquareInPerc + '%',
-                href: GetCharactersData[i - 1].image,
-                name: GetCharactersData[i - 1].name
+            if (GetCharactersData.length == undefined) {
+                if (GetCharactersData.image == undefined) {
+                    return;
+                } else {
+                    var t = newElem('image', {
+                        x: XInsertPosition + '%',
+                        y: YInsertPosition + '%',
+                        width: XSideOfASquareInPerc + '%',
+                        height: YSideOfASquareInPerc + '%',
+                        href: GetCharactersData.image,
+                        name: GetCharactersData.name
 
-            })
+                    })
+                }
+            } else {
+                var t = newElem('image', {
+                    x: XInsertPosition + '%',
+                    y: YInsertPosition + '%',
+                    width: XSideOfASquareInPerc + '%',
+                    height: YSideOfASquareInPerc + '%',
+                    href: GetCharactersData[i - 1].image,
+                    name: GetCharactersData[i - 1].name
+
+                })
+            }
             one.appendChild(t);
         }
 
@@ -97,7 +113,13 @@ function Redirect() {
 }
 
 function CountBlocksSize() {
-    console.log(GetCharactersData.length);
+    // console.log(GetCharactersData.length);
+    if (GetCharactersData.length == undefined) {
+        var GetCharactersDatalength = 1;
+    } else {
+        var GetCharactersDatalength = GetCharactersData.length;
+    }
+
     var ClientWidthInPix = Number(document.documentElement.clientWidth),
         ClientHeightInPix = Number(document.documentElement.clientHeight),
         ScreenArea = ClientWidthInPix * ClientHeightInPix,
@@ -105,7 +127,7 @@ function CountBlocksSize() {
         SideOfASquareInPix = 10,
         AreaOfOneSquare = SideOfASquareInPix * SideOfASquareInPix,
         //!! RESERVED first square for @back@
-        NumOfSquares = Number(GetCharactersData.length) + 1;
+        NumOfSquares = Number(GetCharactersDatalength) + 1;
 
     // !!DIVIDED the algorithm into 2 parts. For optimize the search for the optimal length of the square side
     while ((NumOfSquares * AreaOfOneSquare) < ScreenArea) {
