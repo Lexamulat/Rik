@@ -61,10 +61,13 @@ function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
                 width: XSideOfASquareInPerc + '%',
                 height: YSideOfASquareInPerc + '%',
                 fill: "bisque",
+                id: "backButtn"
             })
             var txt = newElem('text', {
-                x: 5 + '%',
-                y: 5 + '%',
+                x: 0 + '%',
+                y: 0 + '%',
+                dy: 13,
+                // dx: 10,
                 style: "font-size: 1em;"
 
             })
@@ -148,15 +151,21 @@ async function start() {
 
     GetCharactersInfo(function() {
         CountBlocksSize()
+        window.onresize = function(e) {
+            console.log("in")
+            one.innerHTML = '';
+            CountBlocksSize()
+        }
+        var GoBack = document.getElementById('backButtn');
+        GoBack.onclick = function(e) {
+            document.location.href = "index.html"
+        }
     });
     // window.onresize = CountBlocksSize
-    window.onresize = function(e) {
-        console.log("in")
-        one.innerHTML = '';
-        CountBlocksSize()
 
-    }
 }
+
+
 
 
 window.onload = start;
