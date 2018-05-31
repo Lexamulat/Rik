@@ -106,8 +106,6 @@ function DisplayLocation(locationRes) {
             //         stroke: 'black',
             //         fill: 'transparent'
             //     })
-
-
             var tmp = 0
             var summwidth = 0;
             console.log(CharactersStack)
@@ -151,8 +149,6 @@ function DisplayLocation(locationRes) {
 function PopUP() {
     // console.log(window.event.clientX)
     console.log(document.documentElement.clientWidth)
-
-
     var SearchingId = this.getAttribute('uid')
 
     for (var i = 0; i < GetlocationRes.length; i++) {
@@ -165,23 +161,24 @@ function PopUP() {
     PopElem.style.display = 'block';
     PopElem.innerHTML = GetlocationRes[i].name + ' has ' + GetlocationRes[i].residents.length + ' residents'
 
-    var XBlock = this.getAttribute('x')
-    XBlock = (XBlock.slice(0, -1))
-    var YBlock = this.getAttribute('y')
-    var WidthBlock = this.getAttribute('width')
-    WidthBlock = (WidthBlock.slice(0, -1))
-    var LeftOfThePop = Number(XBlock) + Number(WidthBlock)
+    var XBlockInPercent = this.getAttribute('x')
+    XBlockInPercent = (XBlockInPercent.slice(0, -1))
+    var YBlockInPercent = this.getAttribute('y')
+    var WidthBlockInPercent = this.getAttribute('width')
+    WidthBlockInPercent = (WidthBlockInPercent.slice(0, -1))
+        // var LeftOfThePop = Number(XBlockInPercent) + Number(WidthBlockInPercent)
         // !! TODO need to fix out of range
-        // if (LeftOfThePop > 90) {
-        //     PopElem.style.left = 48 + '%';
-        //     PopElem.style.top = 50 + '%';
-        // } else {
-    PopElem.style.left = Number(window.event.clientX) + Number(WidthBlock) + 90;
-
-    // ЕСЛИ ПОПАЛ В НАЧАЛО БЛОКА, ЗНАЯ ШИРИНУ ВЫКИНУТЬ В СЕРЕДИНУ. ЕСЛИ БЛИЗКО К КРАЮ ВЫНЕСТИ ЧУТЬ ЗА ПРЕДЕЛ БЛОКА, ПРИ ПЕРЕХОДЕ ВС РАВНО ПЕРЕРИСУЕТСЯ
-
+    var ClientWidthInPix = Number(document.documentElement.clientWidth)
+    var ClientXCoordInPix = Number(window.event.clientX)
+    var ProcFromLeft = (((ClientWidthInPix - ClientXCoordInPix) / ClientWidthInPix) * 100)
+    console.log(ProcFromLeft)
+    var ShiftInPx = (ClientWidthInPix / 100) * 2
+    if ((Number(XBlockInPercent) + Number(WidthBlockInPercent)) > 90) {
+        PopElem.style.left = (100 - Number(WidthBlockInPercent) - 13) + '%';
+    } else {
+        PopElem.style.left = ClientXCoordInPix + ShiftInPx
+    }
     PopElem.style.top = window.event.clientY;
-    //}
 
 }
 
@@ -250,7 +247,7 @@ async function start() {
     var POP = document.getElementById('popUp');
     POP.onmouseover = function(e) {
         console.log("out")
-        PopElem.style.display = 'none';
+        this.style.display = 'none';
     }
 }
 

@@ -1,6 +1,8 @@
 body {
     padding: 0;
     margin: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .full {
@@ -11,7 +13,7 @@ body {
 #popUp {
     width: 12%;
     height: 5%;
-    font-size: 0.8em;
+    font-size: 0.5em;
     background-color: bisque;
     border: solid 1px black;
     top: 20%;
@@ -21,13 +23,17 @@ body {
     z-index: 999;
 }
 
+text {
+    font-size: 0.7em;
+}
+
 
 /* выносить окно за размеры блока и не давать мышке на него навестись */
 
 @media screen and (max-width:767px) {
     #popUp {
         font-size: 0.6em;
-        width: 23%;
+        width: 24%;
         height: 8%;
     }
     text {
