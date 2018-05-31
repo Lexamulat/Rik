@@ -54,7 +54,7 @@ function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
             XInsertPosition = 0;
         }
 
-        if (i == 0) {
+        if (i === 0) {
             var t = newElem('rect', {
                 x: XInsertPosition + '%',
                 y: YInsertPosition + '%',
