@@ -43,7 +43,7 @@ function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
     var XInsertPosition = 0,
         YInsertPosition = 0,
         j = 0;
-
+    console.log(GetCharactersData)
     for (var i = 0; i < NumOfSquares; i++) {
 
         XInsertPosition = j * XSideOfASquareInPerc
@@ -54,15 +54,36 @@ function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
             XInsertPosition = 0;
         }
 
+        if (i == 0) {
+            var t = newElem('rect', {
+                x: XInsertPosition + '%',
+                y: YInsertPosition + '%',
+                width: XSideOfASquareInPerc + '%',
+                height: YSideOfASquareInPerc + '%',
+                fill: "bisque",
+            })
+            var txt = newElem('text', {
+                x: 5 + '%',
+                y: 5 + '%',
+                style: "font-size: 3em;"
 
-        var t = newElem('image', {
-            x: XInsertPosition + '%',
-            y: YInsertPosition + '%',
-            width: XSideOfASquareInPerc + '%',
-            height: YSideOfASquareInPerc + '%',
-        })
+            })
+            one.appendChild(t);
+            one.appendChild(txt);
+            txt.innerHTML = "Back";
 
-        one.appendChild(t);
+        } else {
+            var t = newElem('image', {
+                x: XInsertPosition + '%',
+                y: YInsertPosition + '%',
+                width: XSideOfASquareInPerc + '%',
+                height: YSideOfASquareInPerc + '%',
+                href: GetCharactersData[i - 1].image
+
+            })
+            one.appendChild(t);
+        }
+
 
     }
 }
