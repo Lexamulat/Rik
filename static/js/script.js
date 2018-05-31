@@ -184,7 +184,7 @@ async function GetCharacters() {
 
 var GetlocationRes = {}
 
-async function start() {
+function start() {
 
     var RequestString = "https://rickandmortyapi.com/api/location/"
 

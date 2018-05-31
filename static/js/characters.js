@@ -215,7 +215,7 @@ function imgPopDown() {
 
 var GetCharactersData = {}
 
-async function start() {
+function start() {
 
     getCharactersInfo(function() {
         countBlocksSize()
