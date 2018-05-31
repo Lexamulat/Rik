@@ -203,6 +203,10 @@ async function start() {
     console.log(GetlocationRes)
     var RequestString = "https://rickandmortyapi.com/api/location/"
     var Getlocation = await Request(RequestString)
+
+    var Data = MyReq(RequestString)
+    console.log("Data", Data)
+
     GetlocationRes = Getlocation.results
     console.log(GetlocationRes)
 
