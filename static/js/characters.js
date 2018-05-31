@@ -65,10 +65,10 @@ function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
                 onclick: "Redirect()"
             })
             var txt = newElem('text', {
-                x: 0 + '%',
-                y: 0 + '%',
-                dy: 13,
-                // style: "font-size: 1em;"
+                x: XInsertPosition + '%',
+                y: YInsertPosition + '%',
+                dy: ((YSideOfASquareInPerc) / 2) + '%',
+                style: "font-size: 2vw;"
 
             })
             one.appendChild(t);
@@ -172,10 +172,10 @@ function ImgPopUP() {
         var XShiftInPx = (ClientWidthInPix / 100) * 2
         PopElem.style.left = ClientXCoordInPix + XShiftInPx
     }
-    if (PercFromTop < 10) {
+    if (PercFromTop < 15) {
         console.log(getComputedStyle(PopElem).height)
             //height of the PopUp window from css in percent
-        var YShiftInPx = (ClientHeightInPix / 100) * 6
+        var YShiftInPx = (ClientHeightInPix / 100) * 15
         PopElem.style.top = window.event.clientY - YShiftInPx;
 
         console.log("top")
@@ -183,6 +183,7 @@ function ImgPopUP() {
         PopElem.style.top = window.event.clientY;
 
     }
+    PopElem.style.fontSize = 2 + 'em'
 
 }
 

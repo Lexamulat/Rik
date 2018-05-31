@@ -143,10 +143,10 @@ function PopUP() {
         var XShiftInPx = (ClientWidthInPix / 100) * 2
         PopElem.style.left = ClientXCoordInPix + XShiftInPx
     }
-    if (PercFromTop < 10) {
+    if (PercFromTop < 15) {
         console.log(getComputedStyle(PopElem).height)
             //height of the PopUp window from css in percent
-        var YShiftInPx = (ClientHeightInPix / 100) * 6
+        var YShiftInPx = (ClientHeightInPix / 100) * 15
         PopElem.style.top = window.event.clientY - YShiftInPx;
 
         console.log("top")
@@ -225,11 +225,11 @@ async function start() {
         rectangles[i].onclick = GetCharacters
     }
 
-    var POP = document.getElementById('popUp');
-    POP.onmouseover = function(e) {
-        console.log("out")
-        this.style.display = 'none';
-    }
+    // var POP = document.getElementById('popUp');
+    // POP.onmouseover = function(e) {
+    //     console.log("out")
+    //     this.style.display = 'none';
+    // }
 }
 
 

@@ -12,8 +12,8 @@ body {
 
 #popUp {
     width: 12%;
-    height: 5%;
-    font-size: 0.5em;
+    height: 14%;
+    font-size: 0.8em;
     background-color: bisque;
     border: solid 1px black;
     top: 20%;
@@ -21,6 +21,7 @@ body {
     position: absolute;
     display: none;
     z-index: 999;
+    pointer-events: none;
 }
 
 image {
@@ -32,18 +33,16 @@ image {
 
 text {
     font-size: 0.7em;
+    pointer-events: none;
 }
 
 
 /* выносить окно за размеры блока и не давать мышке на него навестись */
 
-@media screen and (max-width:767px) {
+@media screen and (max-width:768px) {
     #popUp {
-        font-size: 0.3em;
+        font-size: 0.9em;
         width: 24%;
-        height: 5%;
-    }
-    text {
-        font-size: 0.6em;
+        height: 15%;
     }
 }
