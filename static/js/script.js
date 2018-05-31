@@ -1,9 +1,10 @@
-function setMax(locationRes, CharactersStack, summ, callback) {
+function countNumOfInhabitantsInPlanets(locationRes, CharactersStack, summ, callback) {
 
     for (var i = 0; i < locationRes.length; i++) {
+        // !! calculate the weight of one inhabitant. there are planets with 0 inh thats why +1
         summ += locationRes[i].residents.length + 1;
         if (CharactersStack[locationRes[i].residents.length] == undefined) {
-
+            // "max:"is the num of planets with the same number of inhabitants, "curr:" used later for Setheight of one block in this category
             CharactersStack[locationRes[i].residents.length] = { 'max': 1, 'curr': 1, 'setX': 0 };
 
         } else {
@@ -19,17 +20,19 @@ function setMax(locationRes, CharactersStack, summ, callback) {
 function toSetX(CharactersStack, widthOfOneElement, currentSetX, call) {
 
     var prevkey = -1;
+
     for (var key in CharactersStack) {
-        if (prevkey == -1) {
+        if (prevkey === -1) {
             CharactersStack[key].setX = 0;
         } else {
-            if (prevkey == 0) {
+            if (prevkey === 0) {
                 currentSetX += (widthOfOneElement * (CharactersStack[prevkey].max))
             } else {
                 currentSetX += (widthOfOneElement * (CharactersStack[prevkey].max * (Number(prevkey) + 1)))
                 var c = currentSetX
 
             }
+            // !!Set X coords for the group of planets
             CharactersStack[key].setX = currentSetX;
         }
         prevkey = key
@@ -47,7 +50,7 @@ function displayLocation(locationRes) {
     var CharactersStack = {};
 
 
-    setMax(locationRes, CharactersStack, summ, function(summ) {
+    countNumOfInhabitantsInPlanets(locationRes, CharactersStack, summ, function(summ) {
         var widthOfOneElement = 100 / summ;
         var currentSetX = 0;
         toSetX(CharactersStack, widthOfOneElement, currentSetX, function() {
@@ -213,6 +216,8 @@ function start() {
 
 }
 window.onload = start;
+
+// TODO WRITE DATA TO LOCALSTORAGE
 
 
 // rectangles[i].onmouseout = function(e) {

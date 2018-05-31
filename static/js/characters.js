@@ -153,7 +153,6 @@ function countBlocksSize() {
     // console.log("s of squares", NumOfSquares * (SideOfASquareInPix * SideOfASquareInPix))
 
     var can = canIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
-    console.log("can", can)
 
     while (can == 0) {
         SideOfASquareInPix--;
@@ -193,13 +192,11 @@ function imgPopUp() {
         PopElem.style.left = ClientXCoordInPix + XShiftInPx
     }
     if (PercFromTop < 15) {
-        console.log(getComputedStyle(PopElem).height)
-            //height of the PopUp window from css in percent
+        //height of the PopUp window from css in percent
         var YShiftInPx = (ClientHeightInPix / 100) * 15
             // !! TODO can get cuur val in px, screen in px and calc width in %
         PopElem.style.top = window.event.clientY - YShiftInPx;
 
-        console.log("top")
     } else {
         PopElem.style.top = window.event.clientY;
 
