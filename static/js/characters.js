@@ -205,7 +205,7 @@ function ImgPopUP() {
         PopElem.style.top = window.event.clientY;
 
     }
-    PopElem.style.fontSize = 2 + 'em'
+    PopElem.style.fontSize = 2 + 'vw'
 
 }
 
@@ -223,16 +223,20 @@ async function start() {
 
     GetCharactersInfo(function() {
         CountBlocksSize()
-
+        var imgs = document.getElementsByTagName('image');
         window.onresize = function(e) {
             console.log("in")
             one.innerHTML = '';
             CountBlocksSize()
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].onmouseover = ImgPopUP
+                imgs[i].onmouseout = ImgPopDown
+            }
         }
 
 
 
-        var imgs = document.getElementsByTagName('image');
+
         for (var i = 0; i < imgs.length; i++) {
             imgs[i].onmouseover = ImgPopUP
             imgs[i].onmouseout = ImgPopDown

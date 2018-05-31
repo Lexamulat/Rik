@@ -41,7 +41,7 @@ text {
 
 @media screen and (max-width:768px) {
     #popUp {
-        font-size: 0.9em;
+        font-size: 0.92vw;
         width: 24%;
         height: 15%;
     }
