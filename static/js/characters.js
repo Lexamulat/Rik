@@ -1,4 +1,4 @@
-async function GetCharactersInfo(callback) {
+async function getCharactersInfo(callback) {
 
     //!! Take Get Params eraise @?uid=3@ to 3
     var QueryStr = (document.location.search).substr(10)
@@ -7,7 +7,7 @@ async function GetCharactersInfo(callback) {
     callback()
 }
 
-function CanIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares) {
+function canIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares) {
     var XInsertPosition = 0,
         YInsertPosition = 0,
         j = 0;
@@ -31,7 +31,7 @@ function CanIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, 
 
 }
 
-function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares) {
+function displayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares) {
     console.log("in display func")
 
 
@@ -62,7 +62,7 @@ function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
                 height: YSideOfASquareInPerc + '%',
                 fill: "plum",
                 id: "backButtn",
-                onclick: "Redirect()"
+                onclick: "redirect()"
             })
             var txt = newElem('text', {
                 x: XInsertPosition + '%',
@@ -108,11 +108,11 @@ function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
     }
 }
 
-function Redirect() {
+function redirect() {
     document.location.href = "index.html"
 }
 
-function CountBlocksSize() {
+function countBlocksSize() {
     // console.log(GetCharactersData.length);
     if (GetCharactersData.length == undefined) {
         var GetCharactersDatalength = 1;
@@ -153,22 +153,22 @@ function CountBlocksSize() {
     console.log("side size", SideOfASquareInPix)
     console.log("s of squares", NumOfSquares * (SideOfASquareInPix * SideOfASquareInPix))
 
-    // CanIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
-    var can = CanIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
+    // canIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
+    var can = canIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
     console.log("can", can)
 
     while (can == 0) {
         SideOfASquareInPix--;
-        can = CanIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
+        can = canIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
         console.log("can", can)
     }
     console.log(SideOfASquareInPix)
 
-    DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
+    displayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
 }
 
 
-function ImgPopUP() {
+function imgPopUp() {
 
     var Description = this.getAttribute('name')
     var PopElem = document.getElementById('popUp')
@@ -209,7 +209,7 @@ function ImgPopUP() {
 
 }
 
-function ImgPopDown() {
+function imgPopDown() {
     var PopElem = document.getElementById('popUp')
     PopElem.style.display = 'none';
 }
@@ -221,16 +221,16 @@ async function start() {
     console.log("Characters start")
 
 
-    GetCharactersInfo(function() {
-        CountBlocksSize()
+    getCharactersInfo(function() {
+        countBlocksSize()
         var imgs = document.getElementsByTagName('image');
         window.onresize = function(e) {
             console.log("in")
             one.innerHTML = '';
-            CountBlocksSize()
+            countBlocksSize()
             for (var i = 0; i < imgs.length; i++) {
-                imgs[i].onmouseover = ImgPopUP
-                imgs[i].onmouseout = ImgPopDown
+                imgs[i].onmouseover = imgPopUp
+                imgs[i].onmouseout = imgPopDown
             }
         }
 
@@ -238,11 +238,11 @@ async function start() {
 
 
         for (var i = 0; i < imgs.length; i++) {
-            imgs[i].onmouseover = ImgPopUP
-            imgs[i].onmouseout = ImgPopDown
+            imgs[i].onmouseover = imgPopUp
+            imgs[i].onmouseout = imgPopDown
         }
     });
-    // window.onresize = CountBlocksSize
+    // window.onresize = countBlocksSize
 
 
 }

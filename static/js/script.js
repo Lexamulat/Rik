@@ -1,4 +1,4 @@
-function SetMax(locationRes, CharactersStack, summ, callback) {
+function setMax(locationRes, CharactersStack, summ, callback) {
 
     for (var i = 0; i < locationRes.length; i++) {
         summ += locationRes[i].residents.length + 1;
@@ -14,7 +14,7 @@ function SetMax(locationRes, CharactersStack, summ, callback) {
 }
 
 
-function TosetX(CharactersStack, widthOfOneElement, currentSetX, call) {
+function toSetX(CharactersStack, widthOfOneElement, currentSetX, call) {
 
     var prevkey = -1;
     for (var key in CharactersStack) {
@@ -37,7 +37,7 @@ function TosetX(CharactersStack, widthOfOneElement, currentSetX, call) {
 }
 
 
-function DisplayLocation(locationRes) {
+function displayLocation(locationRes) {
     var summ = 0;
     var shift = 0;
     var xCoord = 0,
@@ -45,10 +45,10 @@ function DisplayLocation(locationRes) {
     var CharactersStack = {};
 
 
-    SetMax(locationRes, CharactersStack, summ, function(summ) {
+    setMax(locationRes, CharactersStack, summ, function(summ) {
         var widthOfOneElement = 100 / summ;
         var currentSetX = 0;
-        TosetX(CharactersStack, widthOfOneElement, currentSetX, function() {
+        toSetX(CharactersStack, widthOfOneElement, currentSetX, function() {
 
             var widthOfTheBlock = 0;
             var XsetX = 0;
@@ -108,7 +108,7 @@ function DisplayLocation(locationRes) {
 
 
 
-function PopUP() {
+function popUP() {
     // console.log(window.event.clientX)
     console.log(document.documentElement.clientWidth)
     var SearchingId = this.getAttribute('uid')
@@ -161,7 +161,7 @@ function PopUP() {
 
 
 
-function PopDown() {
+function popDown() {
     var PopElem = document.getElementById('popUp')
     PopElem.style.display = 'none';
 }
@@ -218,14 +218,14 @@ async function start() {
     }
     console.log(GetlocationRes)
 
-    DisplayLocation(GetlocationRes)
+    displayLocation(GetlocationRes)
 
 
     var rectangles = document.getElementsByTagName('rect');
 
     for (var i = 0; i < rectangles.length; i++) {
-        rectangles[i].onmouseover = PopUP
-        rectangles[i].onmouseout = PopDown
+        rectangles[i].onmouseover = popUP
+        rectangles[i].onmouseout = popDown
         rectangles[i].onclick = GetCharacters
     }
 
