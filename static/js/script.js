@@ -126,11 +126,10 @@ function PopUP() {
 
     var XBlockInPercent = this.getAttribute('x')
     XBlockInPercent = (XBlockInPercent.slice(0, -1))
-    var YBlockInPercent = this.getAttribute('y')
+        // var YBlockInPercent = this.getAttribute('y')
     var WidthBlockInPercent = this.getAttribute('width')
     WidthBlockInPercent = (WidthBlockInPercent.slice(0, -1))
-        // var LeftOfThePop = Number(XBlockInPercent) + Number(WidthBlockInPercent)
-        // !! TODO need to fix out of range
+
     var ClientWidthInPix = Number(document.documentElement.clientWidth)
     var ClientHeightInPix = Number(document.documentElement.clientHeight)
     var ClientXCoordInPix = Number(window.event.clientX)

@@ -60,16 +60,15 @@ function DisplayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInP
                 y: YInsertPosition + '%',
                 width: XSideOfASquareInPerc + '%',
                 height: YSideOfASquareInPerc + '%',
-                fill: "bisque",
+                fill: "plum",
                 id: "backButtn",
-                onclick: "Redir()"
+                onclick: "Redirect()"
             })
             var txt = newElem('text', {
                 x: 0 + '%',
                 y: 0 + '%',
                 dy: 13,
-                // dx: 10,
-                style: "font-size: 1em;"
+                // style: "font-size: 1em;"
 
             })
             one.appendChild(t);
@@ -149,9 +148,48 @@ function CountBlocksSize() {
 
 function ImgPopUP() {
 
-    var SearchingId = this.getAttribute('uid')
+    var Description = this.getAttribute('name')
+    var PopElem = document.getElementById('popUp')
+
+    PopElem.style.display = 'block';
+    PopElem.innerHTML = Description
+    var XBlockInPercent = this.getAttribute('x')
+    XBlockInPercent = (XBlockInPercent.slice(0, -1))
+        // var YBlockInPercent = this.getAttribute('y')
+    var WidthBlockInPercent = this.getAttribute('width')
+    WidthBlockInPercent = (WidthBlockInPercent.slice(0, -1))
+
+    var ClientWidthInPix = Number(document.documentElement.clientWidth)
+    var ClientHeightInPix = Number(document.documentElement.clientHeight)
+    var ClientXCoordInPix = Number(window.event.clientX)
+    var ClientYCoordInPix = Number(window.event.clientY)
+    var PercFromTop = (((ClientHeightInPix - ClientYCoordInPix) / ClientHeightInPix) * 100)
+
+    if ((Number(XBlockInPercent) + Number(WidthBlockInPercent)) > 90) {
+        //width of the PopUp window from css in percent
+        PopElem.style.left = (100 - Number(WidthBlockInPercent) - 13) + '%';
+    } else {
+        var XShiftInPx = (ClientWidthInPix / 100) * 2
+        PopElem.style.left = ClientXCoordInPix + XShiftInPx
+    }
+    if (PercFromTop < 10) {
+        console.log(getComputedStyle(PopElem).height)
+            //height of the PopUp window from css in percent
+        var YShiftInPx = (ClientHeightInPix / 100) * 6
+        PopElem.style.top = window.event.clientY - YShiftInPx;
+
+        console.log("top")
+    } else {
+        PopElem.style.top = window.event.clientY;
+
+    }
+
 }
 
+function ImgPopDown() {
+    var PopElem = document.getElementById('popUp')
+    PopElem.style.display = 'none';
+}
 
 var GetCharactersData = {}
 
@@ -164,21 +202,18 @@ async function start() {
         CountBlocksSize()
 
         window.onresize = function(e) {
-                GoBack = document.getElementById('backButtn');
-                console.log("in")
-                one.innerHTML = '';
-                CountBlocksSize()
-                GoBack = document.getElementById('backButtn');
-            }
-            // var GoBack = document.getElementById('backButtn');
-            // GoBack.onclick = function() {
-            //         document.location.href = "index.html"
-            //     }
-            // var imgs = document.getElementsByTagName('image');
-            // for (var i = 0; i < rectangles.length; i++) {
-            //     rectangles[i].onmouseover = ImgPopUP
-            //         // rectangles[i].onmouseout = ImgPopDown
-            // }
+            console.log("in")
+            one.innerHTML = '';
+            CountBlocksSize()
+        }
+
+
+
+        var imgs = document.getElementsByTagName('image');
+        for (var i = 0; i < imgs.length; i++) {
+            imgs[i].onmouseover = ImgPopUP
+            imgs[i].onmouseout = ImgPopDown
+        }
     });
     // window.onresize = CountBlocksSize
 
