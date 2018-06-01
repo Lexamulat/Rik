@@ -4,9 +4,17 @@ function start() {
 
     var RequestString = "https://rickandmortyapi.com/api/location/"
 
-    Planets.setContent(Planets.Request(RequestString))
+    var Getlocation = Planets.Request(RequestString)
 
-    Planets.showContent();
+    Planets.setContent(Getlocation.results)
+
+    while (Getlocation.info.next != "") {
+
+        RequestString = Getlocation.info.next
+        Getlocation = Planets.Request(RequestString)
+        Planets.setContent((Planets.getContent()).concat(Getlocation.results))
+    }
+    Planets.showContent()
 
 }
 
