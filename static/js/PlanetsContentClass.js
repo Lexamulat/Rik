@@ -128,14 +128,11 @@ function PlanetsContentClass() {
 
         }
         QueryStr = QueryStr.substr(1)
-
-
-
-        document.location.href = "characters.html?QueryStr=" + QueryStr;
+        document.location.href = "test2.html?QueryStr=" + QueryStr;
     }
 
     this.addClicks = function() {
-        console.log("addClicks")
+        console.log("add")
         var rectangles = document.getElementsByTagName('rect');
 
         for (var i = 0; i < rectangles.length; i++) {

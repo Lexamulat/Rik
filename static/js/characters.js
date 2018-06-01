@@ -26,10 +26,7 @@ function canIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, 
             return 0;
         }
     }
-
     return 1;
-
-
 }
 
 function displayCharacters(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares) {
