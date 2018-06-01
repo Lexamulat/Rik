@@ -145,6 +145,7 @@ function popUP() {
         PopElem.style.top = window.event.clientY;
 
     }
+    PopElem.style.fontSize = 2 + 'vw'
 
 }
 

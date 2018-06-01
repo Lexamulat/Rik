@@ -71,7 +71,6 @@ function CharactersContentClass() {
                     height: YSideOfASquareInPerc + '%',
                     fill: "plum",
                     id: "backButtn",
-                    // onclick: "Characters.redirect()"
                 })
                 var txt = suppThis.newElem('text', {
                     x: XInsertPosition + '%',
@@ -125,14 +124,6 @@ function CharactersContentClass() {
         document.location.href = "test.html"
 
     }
-
-    // this.redirect = function() {
-    //     console.log("redir")
-    //     document.location.href = "test.html"
-
-    // };
-
-
 
     this.setAnimatedpopUpsAndBakcClik = function() {
         var imgs = document.getElementsByTagName('image');
