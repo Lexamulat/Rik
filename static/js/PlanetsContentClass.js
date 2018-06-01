@@ -88,7 +88,9 @@ function PlanetsContentClass() {
                         height: setHeight + '%',
                         stroke: 'black',
                         fill: 'transparent',
-                        uid: locationRes[i].id
+                        uid: locationRes[i].id,
+                        name: suppThis.getContent()[i].name + ' has ' + suppThis.getContent()[i].residents.length + ' residents'
+
                     })
 
                     var txt = suppThis.newElem('text', {
@@ -132,7 +134,7 @@ function PlanetsContentClass() {
     }
 
     this.addClicks = function() {
-        console.log("add")
+        console.log("add pops")
         var rectangles = document.getElementsByTagName('rect');
 
         for (var i = 0; i < rectangles.length; i++) {

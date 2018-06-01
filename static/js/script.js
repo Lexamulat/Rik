@@ -79,7 +79,8 @@ function displayLocation(locationRes) {
                     height: setHeight + '%',
                     stroke: 'black',
                     fill: 'transparent',
-                    uid: locationRes[i].id
+                    uid: locationRes[i].id,
+                    name: GetlocationRes[i].name + ' has ' + GetlocationRes[i].residents.length + ' residents'
                 })
 
                 var txt = newElem('text', {
@@ -102,18 +103,20 @@ function displayLocation(locationRes) {
 
 
 function popUP() {
-    var SearchingId = this.getAttribute('uid')
+    console.log("PopUp")
+        // var SearchingId = this.getAttribute('uid')
+    var Description = this.getAttribute('name')
 
-    for (var i = 0; i < GetlocationRes.length; i++) {
-        if (GetlocationRes[i].id == SearchingId) {
-            break;
-        }
-    }
+    // for (var i = 0; i < GetlocationRes.length; i++) {
+    //     if (GetlocationRes[i].id == SearchingId) {
+    //         break;
+    //     }
+    // }
     var PopElem = document.getElementById('popUp')
 
     PopElem.style.display = 'block';
 
-    PopElem.innerHTML = GetlocationRes[i].name + ' has ' + GetlocationRes[i].residents.length + ' residents'
+    PopElem.innerHTML = Description
 
     var XBlockInPercent = this.getAttribute('x')
         // !! eraise % from x=26.4544%
@@ -145,7 +148,7 @@ function popUP() {
         PopElem.style.top = window.event.clientY;
 
     }
-    PopElem.style.fontSize = 2 + 'vw'
+    PopElem.style.fontSize = 1.5 + 'vw'
 
 }
 
@@ -153,6 +156,8 @@ function popUP() {
 
 
 function popDown() {
+    console.log("PopDown")
+
     var PopElem = document.getElementById('popUp')
     PopElem.style.display = 'none';
 }

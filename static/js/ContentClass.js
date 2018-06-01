@@ -50,12 +50,51 @@ function ContentClass() {
         console.log("someParentMethd")
     };
 
-    this.popUp = function() {
-        console.log("popUp")
+    this.popUP = function() {
+        var Description = this.getAttribute('name')
+        var PopElem = document.getElementById('popUp')
+
+        PopElem.style.display = 'block';
+
+        PopElem.innerHTML = Description
+
+        var XBlockInPercent = this.getAttribute('x')
+            // !! eraise % from x=26.4544%
+        XBlockInPercent = (XBlockInPercent.slice(0, -1))
+
+        var WidthBlockInPercent = this.getAttribute('width')
+        WidthBlockInPercent = (WidthBlockInPercent.slice(0, -1))
+            // !! get current mouse coordinates and screen params
+        var ClientWidthInPix = Number(document.documentElement.clientWidth)
+        var ClientHeightInPix = Number(document.documentElement.clientHeight)
+        var ClientXCoordInPix = Number(window.event.clientX)
+        var ClientYCoordInPix = Number(window.event.clientY)
+
+        var PercFromTop = (((ClientHeightInPix - ClientYCoordInPix) / ClientHeightInPix) * 100)
+
+        if ((Number(XBlockInPercent) + Number(WidthBlockInPercent)) > 90) {
+            //!! width of the PopUp window from css in percent
+            PopElem.style.left = (100 - Number(WidthBlockInPercent) - 13) + '%';
+        } else {
+            var XShiftInPx = (ClientWidthInPix / 100) * 2
+            PopElem.style.left = ClientXCoordInPix + XShiftInPx
+        }
+        if (PercFromTop < 15) {
+            //!! height of the PopUp window from css in percent
+            var YShiftInPx = (ClientHeightInPix / 100) * 15
+            PopElem.style.top = window.event.clientY - YShiftInPx;
+
+        } else {
+            PopElem.style.top = window.event.clientY;
+
+        }
+        PopElem.style.fontSize = 1.5 + 'vw'
+
     };
 
     this.popDown = function() {
-        console.log("popDown")
+        var PopElem = document.getElementById('popUp')
+        PopElem.style.display = 'none';
     };
 
     this.setContent = function(inputContent) {

@@ -130,8 +130,7 @@ function CharactersContentClass() {
         var btn = document.getElementById('backButtn');
         btn.onclick = redirect
         for (var i = 0; i < imgs.length; i++) {
-            imgs[i].onmouseover = this.imgPopUp
-            imgs[i].onmouseout = this.imgPopDown
+            imgs[i].onmouseover = suppThis.popUP
         }
     };
 
