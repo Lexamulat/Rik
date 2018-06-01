@@ -142,5 +142,28 @@ function PlanetsContentClass() {
         }
     };
 
+    // localStorage.setItem("basket", JSON.stringify(basket))
+
+    checkLocalStor = function() {
+        if (localStorage.getItem("location") != null) {
+            return 1;
+        } else {
+            console.log("bask empty")
+            return 0;
+        }
+    };
+
+    this.setLocalStor = function() {
+        localStorage.setItem("location", JSON.stringify(suppThis.getContent()))
+    };
+
+    this.getLocalStor = function() {
+        if (checkLocalStor() == 1) {
+            return JSON.parse(localStorage.getItem("location"))
+
+        } else {
+            return 0;
+        }
+    };
 
 }

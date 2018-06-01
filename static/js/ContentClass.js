@@ -1,4 +1,5 @@
 function ContentClass() {
+
     var content = {};
     var suppThis = this;
 
