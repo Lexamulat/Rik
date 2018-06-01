@@ -120,16 +120,29 @@ function CharactersContentClass() {
         }
     }
 
-    this.redirect = function() {
-        console.log("redirect")
+    function redirect() {
+        console.log("redir")
         document.location.href = "test.html"
 
+    }
+
+    // this.redirect = function() {
+    //     console.log("redir")
+    //     document.location.href = "test.html"
+
+    // };
+
+
+
+    this.setAnimatedpopUpsAndBakcClik = function() {
+        var imgs = document.getElementsByTagName('image');
+        var btn = document.getElementById('backButtn');
+        btn.onclick = redirect
+        for (var i = 0; i < imgs.length; i++) {
+            imgs[i].onmouseover = this.imgPopUp
+            imgs[i].onmouseout = this.imgPopDown
+        }
     };
-
-    // function redirect() {
-    //     console.log("redirect")
-    // }
-
 
     this.countBlocksSize = function() {
         if (this.getContent().length == undefined) {
