@@ -21,14 +21,14 @@ function ContentClass() {
     };
     //FUNCTIONS FOR RENDER SUPPORT BEGIN
 
-    this.attr = function(el, at, value) {
-        at = { 'for': 'htmlFor', 'class': 'className' }[at] || at;
+    this.attr = function(el, attribute, value) {
+        attribute = { 'for': 'htmlFor' }[attribute] || attribute;
         if (!value) {
-            return el[at] || el.getAttribute(at) || '';
+            return el[attribute] || el.getAttribute(attribute) || '';
         } else {
-            if (at == 'style') { el.style.cssText = value; return; }
-            el[at] = value;
-            if (el.setAttribute) el.setAttribute(at, value);
+            if (attribute == 'style') { el.style.cssText = value; return; }
+            el[attribute] = value;
+            if (el.setAttribute) el.setAttribute(attribute, value);
         }
     };
 

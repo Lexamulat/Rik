@@ -84,6 +84,7 @@ function PlanetsContentClass() {
                         stroke: 'black',
                         fill: 'transparent',
                         uid: locationRes[i].id,
+                        class: "myrect",
                         name: suppThis.getContent()[i].name + ' has ' + suppThis.getContent()[i].residents.length + ' residents'
 
                     })
