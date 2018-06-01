@@ -2,15 +2,10 @@ function CharactersContentClass() {
     ContentClass.call(this);
     var suppThis = this;
 
-    this.displayContent = function() {
-        console.log("characters disp")
-        this.someParentMethd()
-    };
+
 
     this.getCharactersInfo = function(callback) {
         var QueryStr = (document.location.search).substr(10)
-
-        // var Getlocation = Planets.Request(RequestString);
         this.setContent(this.Request("https://rickandmortyapi.com/api/character/" + QueryStr))
         this.showContent()
         callback()
@@ -120,8 +115,7 @@ function CharactersContentClass() {
     }
 
     function redirect() {
-        console.log("redir")
-        document.location.href = "test.html"
+        document.location.href = "mainPlanets.html"
 
     }
 

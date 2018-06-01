@@ -57,7 +57,6 @@ function PlanetsContentClass() {
         var xCoord = 0,
             yCoord = 0;
         var CharactersStack = {};
-        console.log("PL CONT")
         countNumOfInhabitantsInPlanets(locationRes, CharactersStack, summ, function(summ) {
 
             var widthOfOneElement = 100 / summ;
@@ -130,11 +129,10 @@ function PlanetsContentClass() {
 
         }
         QueryStr = QueryStr.substr(1)
-        document.location.href = "test2.html?QueryStr=" + QueryStr;
+        document.location.href = "subCharacters.html?QueryStr=" + QueryStr;
     }
 
     this.addClicks = function() {
-        console.log("add pops")
         var rectangles = document.getElementsByTagName('rect');
 
         for (var i = 0; i < rectangles.length; i++) {
