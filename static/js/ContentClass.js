@@ -24,6 +24,21 @@ function ContentClass() {
     this.showContent = function() {
         console.log("content: ", content)
     };
+
+    this.Request = function(url) {
+        var req = new XMLHttpRequest();
+        req.open('GET', url, false);
+        req.send();
+        if (req.status != 200) {
+
+            alert(req.status + ': ' + req.statusText);
+        } else {
+            return JSON.parse(req.responseText)
+        }
+    };
+
+
+
     //REDEFINED METHODS
 
     this.displayContent = function() {
