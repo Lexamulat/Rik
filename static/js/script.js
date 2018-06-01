@@ -156,7 +156,7 @@ function popDown() {
     PopElem.style.display = 'none';
 }
 
-async function GetCharacters() {
+function GetCharacters() {
     var SearchingId = this.getAttribute('uid')
 
     for (var i = 0; i < GetlocationRes.length; i++) {

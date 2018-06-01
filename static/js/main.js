@@ -14,8 +14,9 @@ function start() {
         Getlocation = Planets.Request(RequestString)
         Planets.setContent((Planets.getContent()).concat(Getlocation.results))
     }
-    Planets.showContent()
+    Planets.displayContent(Planets.getContent());
 
+    Planets.addClicks();
 }
 
 window.onload = start;
