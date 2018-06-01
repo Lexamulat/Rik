@@ -1,10 +1,6 @@
 function PlanetsContentClass() {
     ContentClass.call(this);
 
-    function planetPrivatefunc() {
-        console.log("pplanetPrivatefunc")
-    }
-
     var suppThis = this;
 
 
@@ -134,7 +130,6 @@ function PlanetsContentClass() {
 
     this.addClicks = function() {
         var rectangles = document.getElementsByTagName('rect');
-
         for (var i = 0; i < rectangles.length; i++) {
             rectangles[i].onmouseover = suppThis.popUP
             rectangles[i].onmouseout = suppThis.popDown
@@ -142,13 +137,10 @@ function PlanetsContentClass() {
         }
     };
 
-    // localStorage.setItem("basket", JSON.stringify(basket))
-
     checkLocalStor = function() {
         if (localStorage.getItem("location") != null) {
             return 1;
         } else {
-            console.log("bask empty")
             return 0;
         }
     };

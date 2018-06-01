@@ -6,8 +6,13 @@ function CharactersContentClass() {
 
     this.getCharactersInfo = function(callback) {
         var QueryStr = (document.location.search).substr(10)
-        this.setContent(this.Request("https://rickandmortyapi.com/api/character/" + QueryStr))
-        this.showContent()
+        var FirstNum = getFirstNumsOfQueryStr(QueryStr);
+        if (checkLocalStor(FirstNum) == 0) {
+            this.setContent(this.Request("https://rickandmortyapi.com/api/character/" + QueryStr))
+            setLocalStor(FirstNum)
+        } else {
+            this.setContent(getLocalStor(FirstNum))
+        }
         callback()
     };
 
@@ -160,12 +165,6 @@ function CharactersContentClass() {
         }
         SideOfASquareInPix--;
         AreaOfOneSquare = SideOfASquareInPix * SideOfASquareInPix;
-
-        // console.log("screen", ScreenArea)
-        // console.log("num", NumOfSquares)
-        // console.log("side size", SideOfASquareInPix)
-        // console.log("s of squares", NumOfSquares * (SideOfASquareInPix * SideOfASquareInPix))
-
         var can = canIDisplayIt(SideOfASquareInPix, ClientWidthInPix, ClientHeightInPix, NumOfSquares)
 
         while (can == 0) {
@@ -177,5 +176,30 @@ function CharactersContentClass() {
 
     };
 
+    getFirstNumsOfQueryStr = function(QueryStr) {
+        var j = 0;
+        for (var i in QueryStr) {
+            if (QueryStr[i] === ',')
+                break;
+            j++;
+        }
+        QueryStr = QueryStr.substr(0, j)
+        return QueryStr
+    };
 
+    checkLocalStor = function(CheckStr) {
+        if (localStorage.getItem("Character" + CheckStr) != null) {
+            return 1;
+        } else {
+            return 0;
+        }
+    };
+
+    setLocalStor = function(FirstNum) {
+        localStorage.setItem("Character" + FirstNum, JSON.stringify(suppThis.getContent()))
+    };
+
+    getLocalStor = function(FirstNum) {
+        return JSON.parse(localStorage.getItem("Character" + FirstNum))
+    };
 }

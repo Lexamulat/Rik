@@ -3,7 +3,6 @@ function start() {
     var Planets = new PlanetsContentClass();
 
     if (Planets.getLocalStor() == 0) {
-        console.log("req")
         var RequestString = "https://rickandmortyapi.com/api/location/"
 
         var Getlocation = Planets.Request(RequestString);
@@ -19,7 +18,6 @@ function start() {
         Planets.setLocalStor()
     } else {
         Planets.setContent(Planets.getLocalStor());
-        console.log("cache")
 
     }
 

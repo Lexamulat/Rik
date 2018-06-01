@@ -1,8 +1,13 @@
 function start() {
 
+
+
     var Characters = new CharactersContentClass();
 
     Characters.getCharactersInfo(function() {
+
+        Characters.showContent()
+
         Characters.countBlocksSize()
         Characters.setAnimatedpopUpsAndBakcClik()
 
